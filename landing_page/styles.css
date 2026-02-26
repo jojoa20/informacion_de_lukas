@@ -283,15 +283,28 @@ img {
     overflow: hidden;
 }
 
-/* Canvas background spanning the screen */
-.hero-canvas-container {
+/* Canvas inner container */
+.hero-canvas {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140%;
+    /* slightly larger to give the floating tags room and depth */
+    height: 140%;
+    object-fit: contain;
+    /* Don't force cover inside a small square to avoid weird crops */
     pointer-events: none;
+    z-index: 1;
+    /* Before tags, but on top of wrapper */
+    opacity: 0.95;
+    mix-blend-mode: screen;
+    /* Enhance premium glow effect if background is black */
+}
+
+/* Hide static logo if canvas is present */
+.hero-image-wrapper>#hero-logo-img {
+    display: none;
 }
 
 .hero-canvas {
@@ -614,6 +627,7 @@ img {
     box-shadow: var(--shadow-md);
     animation: float-tag 5s ease-in-out infinite;
     z-index: 2;
+    /* Tags floating above canvas */
 }
 
 @keyframes float-tag {

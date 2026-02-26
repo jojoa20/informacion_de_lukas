@@ -115,9 +115,24 @@ if (canvas) {
     const frameCount = 191; // 191 frames extracted
     const imgFolder = "public/assets/hero/frames/";
     
+    // Get container for proper sizing
+    const visualContainer = document.querySelector('.hero-visual');
+
     // Resize canvas properly
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const resizeCanvas = () => {
+        if (!visualContainer) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            return;
+        }
+        
+        // Match the container's exact bounded dimensions
+        const rect = visualContainer.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+    };
+    
+    resizeCanvas();
     
     // We will preload images into this array
     const images = [];
@@ -220,8 +235,7 @@ if (canvas) {
     
     // Handle Window Resize
     window.addEventListener("resize", () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        resizeCanvas();
         renderFrame(Math.round(currentScrollFrame));
     });
 }
