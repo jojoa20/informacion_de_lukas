@@ -283,8 +283,14 @@ img {
     object-position: center;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.6;
-    /* Agregamos opacidad para que no tape el contenido ni el fondo oscuro */
+    opacity: 0;
+    animation: hero-fade-in 400ms ease-out forwards;
+}
+
+@keyframes hero-fade-in {
+    to {
+        opacity: 0.92; /* 8% dark overlay */
+    }
 }
 
 .hero-grid {
