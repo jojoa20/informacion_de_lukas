@@ -36,87 +36,95 @@
 
     <!-- HERO -->
     <section class="hero" id="hero">
-        <div class="hero-grid"></div>
-        <div class="hero-particles">
-            <div class="particle p1"></div>
-            <div class="particle p2"></div>
-            <div class="particle p3"></div>
-            <div class="particle p4"></div>
-            <div class="particle p5"></div>
+        <div class="hero-canvas-container">
+            <canvas id="hero-canvas" class="hero-canvas"></canvas>
+            <div class="hero-canvas-overlay"></div>
         </div>
-        <div class="container">
-            <div class="hero-content">
-                <span class="badge hero-badge"><span class="badge-dot"></span>IA + Finanzas Cuantitativas · Solo
-                    Spot</span>
-                <h1>Invierte con la<br><span class="gradient-text">precisión matemática</span><br>de Wall Street.</h1>
-                <p class="hero-subtitle">BULLFOLIO analiza tu perfil de riesgo con Machine Learning, construye tu
-                    portafolio con la Frontera Eficiente de Markowitz y lo valida con 10 años de backtesting real. Sin
-                    adivinar. Solo ciencia.</p>
-                <div class="hero-buttons">
-                    <a href="#cta" class="btn-primary" id="hero-cta-btn">
-                        Construir mi Portafolio
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2.5" stroke-linecap="round">
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                    </a>
-                    <a href="#engines" class="btn-secondary">Ver los Algoritmos</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <div class="hero-stat-value" data-target="10" data-suffix="+ años">0</div>
-                        <div class="hero-stat-label">de datos históricos</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-value" data-target="40" data-suffix="+">0</div>
-                        <div class="hero-stat-label">activos en el universo</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-value" data-target="4" data-suffix=" motores">0</div>
-                        <div class="hero-stat-label">algorítmicos activos</div>
-                    </div>
-                </div>
+
+        <div class="hero-sticky-content">
+            <div class="hero-grid"></div>
+            <div class="hero-particles">
+                <div class="particle p1"></div>
+                <div class="particle p2"></div>
+                <div class="particle p3"></div>
+                <div class="particle p4"></div>
+                <div class="particle p5"></div>
             </div>
-            <div class="hero-visual">
-                <canvas id="hero-canvas" class="hero-canvas"></canvas>
-                <div class="hero-image-wrapper">
-                    <!-- The logo was previously here, but if the canvas is rendering the animation, we shouldn't necessarily need the static logo image simultaneously if the animation is the visual.
+            <div class="container">
+                <div class="hero-content">
+                    <span class="badge hero-badge"><span class="badge-dot"></span>IA + Finanzas Cuantitativas · Solo
+                        Spot</span>
+                    <h1>Invierte con la<br><span class="gradient-text">precisión matemática</span><br>de Wall Street.
+                    </h1>
+                    <p class="hero-subtitle">BULLFOLIO analiza tu perfil de riesgo con Machine Learning, construye tu
+                        portafolio con la Frontera Eficiente de Markowitz y lo valida con 10 años de backtesting real.
+                        Sin
+                        adivinar. Solo ciencia.</p>
+                    <div class="hero-buttons">
+                        <a href="#cta" class="btn-primary" id="hero-cta-btn">
+                            Construir mi Portafolio
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                        <a href="#engines" class="btn-secondary">Ver los Algoritmos</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <div class="hero-stat-value" data-target="10" data-suffix="+ años">0</div>
+                            <div class="hero-stat-label">de datos históricos</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-value" data-target="40" data-suffix="+">0</div>
+                            <div class="hero-stat-label">activos en el universo</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-value" data-target="4" data-suffix=" motores">0</div>
+                            <div class="hero-stat-label">algorítmicos activos</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-image-wrapper">
+                        <!-- The logo was previously here, but if the canvas is rendering the animation, we shouldn't necessarily need the static logo image simultaneously if the animation is the visual.
                     However, keeping the structure for the float tags is important. -->
-                    <div class="float-tag tag-1">
-                        <div class="float-tag-icon green"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                            </svg></div>
-                        <div class="float-tag-text"><strong>Sharpe 1.87</strong><small>Ratio óptimo</small></div>
-                    </div>
-                    <div class="float-tag tag-2">
-                        <div class="float-tag-icon gold"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                                <circle cx="12" cy="12" r="10" />
-                                <path
-                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                                <path d="M2 12h20" />
-                            </svg></div>
-                        <div class="float-tag-text"><strong>Markowitz</strong><small>Frontera eficiente</small></div>
-                    </div>
-                    <div class="float-tag tag-3">
-                        <div class="float-tag-icon cyan"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                            </svg></div>
-                        <div class="float-tag-text"><strong>VaR 95%</strong><small>Riesgo validado</small></div>
-                    </div>
-                    <div class="float-tag tag-4">
-                        <div class="float-tag-icon purple"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-                                <path
-                                    d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2" />
-                            </svg></div>
-                        <div class="float-tag-text"><strong>K-Means IA</strong><small>Perfil de riesgo</small></div>
+                        <div class="float-tag tag-1">
+                            <div class="float-tag-icon green"><svg width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                                </svg></div>
+                            <div class="float-tag-text"><strong>Sharpe 1.87</strong><small>Ratio óptimo</small></div>
+                        </div>
+                        <div class="float-tag tag-2">
+                            <div class="float-tag-icon gold"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path
+                                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                                    <path d="M2 12h20" />
+                                </svg></div>
+                            <div class="float-tag-text"><strong>Markowitz</strong><small>Frontera eficiente</small>
+                            </div>
+                        </div>
+                        <div class="float-tag tag-3">
+                            <div class="float-tag-icon cyan"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                </svg></div>
+                            <div class="float-tag-text"><strong>VaR 95%</strong><small>Riesgo validado</small></div>
+                        </div>
+                        <div class="float-tag tag-4">
+                            <div class="float-tag-icon purple"><svg width="18" height="18" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                                    <path
+                                        d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2" />
+                                </svg></div>
+                            <div class="float-tag-text"><strong>K-Means IA</strong><small>Perfil de riesgo</small></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         </div> <!-- Closing hero-sticky-content -->
     </section>
 
@@ -431,7 +439,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=2.0"></script>
 </body>
 
 </html>
