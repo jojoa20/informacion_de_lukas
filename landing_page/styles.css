@@ -280,7 +280,7 @@ img {
     height: 100vh;
     display: flex;
     align-items: center;
-    overflow: hidden;
+    overflow: visible;
     pointer-events: none;
     /* Let background interaction through if needed */
     z-index: 2;
@@ -316,9 +316,13 @@ img {
     mix-blend-mode: screen;
 }
 
-/* Hide static logo if canvas is present */
-.hero-image-wrapper>#hero-logo-img {
-    display: none;
+/* Show static logo in hero visual area */
+.hero-logo-float {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 32px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 136, 255, 0.1);
+    animation: float 7s ease-in-out infinite;
 }
 
 /* Removing redundant hero-canvas override */
@@ -828,7 +832,179 @@ img {
     border: 1px solid rgba(123, 47, 190, 0.2)
 }
 
-/* Features / Engines */
+/* Scrollytelling — Engines Canvas Animation */
+.engines-scrollytelling {
+    position: relative;
+    height: 500vh;
+    background-color: var(--bg-void);
+}
+
+.scrollytelling-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#engines-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ---------- Scrolly Header (top label) ---------- */
+.scrolly-header {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scrolly-header.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scrolly-header h2 {
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    color: var(--text-primary);
+    margin-top: 12px;
+    letter-spacing: -0.3px;
+}
+
+/* ---------- Bottom Info Bar ---------- */
+.scrolly-infobar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.scrolly-infobar-gradient {
+    height: 200px;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.85) 70%, rgba(0, 0, 0, 0.95) 100%);
+    pointer-events: none;
+}
+
+.scrolly-infobar-content {
+    background: rgba(0, 0, 0, 0.95);
+    padding: 0 40px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    pointer-events: auto;
+}
+
+/* ---------- Step Indicator Dots ---------- */
+.scrolly-steps {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.scrolly-dot {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scrolly-dot.active {
+    background: var(--cyan);
+    color: #000;
+    border-color: var(--cyan);
+    box-shadow: 0 0 20px var(--cyan-glow);
+    transform: scale(1.1);
+}
+
+/* ---------- Info Panels ---------- */
+.scrolly-info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 40px;
+    padding: 0 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+}
+
+.scrolly-info.active {
+    position: relative;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.scrolly-info-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 8px;
+}
+
+.scrolly-info h3 {
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+    line-height: 1.25;
+}
+
+.scrolly-info p {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 14px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.scrolly-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* Features / Engines (legacy) */
 .features {
     padding: var(--section-padding);
     background: var(--bg-void);

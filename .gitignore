@@ -17,3 +17,7 @@ dist/
 
 # Entornos y claves
 .env
+
+# Large video source files
+*.mp4
+.env.local

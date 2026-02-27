@@ -215,3 +215,109 @@ if (canvas) {
         renderFrame(Math.round(currentScrollFrame));
     });
 }
+
+// --- ENGINES SCROLLYTELLING (GSAP ScrollTrigger) ---
+gsap.registerPlugin(ScrollTrigger);
+
+const enginesCanvas = document.getElementById("engines-canvas");
+if (enginesCanvas) {
+    const ctx = enginesCanvas.getContext("2d");
+    enginesCanvas.width = 1920;
+    enginesCanvas.height = 1080;
+
+    const flowFrameCount = 192;
+    const flowFolder = "public/assets/flow/frames/";
+    const flowCurrentFrame = index =>
+        `${flowFolder}frame_${(index + 1).toString().padStart(4, '0')}.webp`;
+
+    const flowImages = [];
+    const flowObj = { frame: 0 };
+
+    // Preload all frames
+    for (let i = 0; i < flowFrameCount; i++) {
+        const img = new Image();
+        img.src = flowCurrentFrame(i);
+        if (i === 0) img.onload = () => flowRender();
+        flowImages.push(img);
+    }
+
+    function flowRender() {
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.clearRect(0, 0, enginesCanvas.width, enginesCanvas.height);
+        if (flowImages[flowObj.frame] && flowImages[flowObj.frame].complete) {
+            ctx.drawImage(flowImages[flowObj.frame], 0, 0,
+                enginesCanvas.width, enginesCanvas.height);
+        }
+    }
+
+    // Info bar elements
+    const infoPanels = [
+        document.getElementById('scrolly-info-1'),
+        document.getElementById('scrolly-info-2'),
+        document.getElementById('scrolly-info-3'),
+        document.getElementById('scrolly-info-4')
+    ];
+    const dots = document.querySelectorAll('.scrolly-dot');
+    const header = document.querySelector('.scrolly-header');
+    let currentStep = 0;
+
+    function setStep(index) {
+        if (index === currentStep && infoPanels[index]?.classList.contains('active')) return;
+
+        // Update info panels
+        infoPanels.forEach(p => { if (p) p.classList.remove('active'); });
+        if (infoPanels[index]) infoPanels[index].classList.add('active');
+
+        // Update dots
+        dots.forEach(d => d.classList.remove('active'));
+        if (dots[index]) dots[index].classList.add('active');
+
+        currentStep = index;
+    }
+
+    function updateInfoBar(progress) {
+        // Show/hide header
+        if (header) {
+            if (progress > 0.02 && progress < 0.95) {
+                header.classList.add('visible');
+            } else {
+                header.classList.remove('visible');
+            }
+        }
+
+        // Determine which step to show based on scroll progress
+        // 4 steps, evenly distributed across the scroll
+        if (progress < 0.25) setStep(0);
+        else if (progress < 0.50) setStep(1);
+        else if (progress < 0.75) setStep(2);
+        else setStep(3);
+    }
+
+    // Initialize first step
+    setStep(0);
+
+    // GSAP scroll-driven animation
+    gsap.to(flowObj, {
+        frame: flowFrameCount - 1,
+        snap: "frame",
+        ease: "none",
+        scrollTrigger: {
+            trigger: ".engines-scrollytelling",
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.5,
+            onUpdate: (self) => {
+                updateInfoBar(self.progress);
+            }
+        },
+        onUpdate: flowRender
+    });
+
+    // Handle resize
+    window.addEventListener("resize", () => {
+        enginesCanvas.width = 1920;
+        enginesCanvas.height = 1080;
+        flowRender();
+    });
+}
