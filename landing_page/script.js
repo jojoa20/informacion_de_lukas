@@ -222,33 +222,55 @@ gsap.registerPlugin(ScrollTrigger);
 const enginesCanvas = document.getElementById("engines-canvas");
 if (enginesCanvas) {
     const ctx = enginesCanvas.getContext("2d");
-    enginesCanvas.width = 1920;
-    enginesCanvas.height = 1080;
+    enginesCanvas.width = 960;
+    enginesCanvas.height = 540;
 
-    const flowFrameCount = 192;
-    const flowFolder = "public/assets/flow/frames/";
-    const flowCurrentFrame = index =>
-        `${flowFolder}frame_${(index + 1).toString().padStart(4, '0')}.webp`;
+    // 4 engine animation sets
+    const engines = [
+        { folder: "public/assets/flow/kmeans/", frames: [], loaded: false },
+        { folder: "public/assets/flow/markowitz/", frames: [], loaded: false },
+        { folder: "public/assets/flow/var/", frames: [], loaded: false },
+        { folder: "public/assets/flow/rebalanceo/", frames: [], loaded: false }
+    ];
+    const FRAME_COUNT = 192;
 
-    const flowImages = [];
-    const flowObj = { frame: 0 };
-
-    // Preload all frames
-    for (let i = 0; i < flowFrameCount; i++) {
-        const img = new Image();
-        img.src = flowCurrentFrame(i);
-        if (i === 0) img.onload = () => flowRender();
-        flowImages.push(img);
+    // Preload a single engine's frames
+    function preloadEngine(idx) {
+        if (engines[idx].loaded) return Promise.resolve();
+        return new Promise(resolve => {
+            let loadedCount = 0;
+            for (let i = 0; i < FRAME_COUNT; i++) {
+                const img = new Image();
+                img.src = `${engines[idx].folder}frame_${(i + 1).toString().padStart(4, '0')}.jpg`;
+                img.onload = img.onerror = () => {
+                    loadedCount++;
+                    if (loadedCount >= FRAME_COUNT) {
+                        engines[idx].loaded = true;
+                        resolve();
+                    }
+                };
+                engines[idx].frames.push(img);
+            }
+        });
     }
 
-    function flowRender() {
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
+    // Start preloading all engines (first one immediately, others deferred)
+    preloadEngine(0).then(() => renderFrame(0, 0));
+    setTimeout(() => preloadEngine(1), 500);
+    setTimeout(() => preloadEngine(2), 1500);
+    setTimeout(() => preloadEngine(3), 2500);
+
+    let currentEngine = 0;
+    let currentFrame = 0;
+
+    function renderFrame(engineIdx, frameIdx) {
         ctx.clearRect(0, 0, enginesCanvas.width, enginesCanvas.height);
-        if (flowImages[flowObj.frame] && flowImages[flowObj.frame].complete) {
-            ctx.drawImage(flowImages[flowObj.frame], 0, 0,
-                enginesCanvas.width, enginesCanvas.height);
+        const img = engines[engineIdx]?.frames[frameIdx];
+        if (img && img.complete && img.naturalWidth > 0) {
+            ctx.drawImage(img, 0, 0, enginesCanvas.width, enginesCanvas.height);
         }
+        currentEngine = engineIdx;
+        currentFrame = frameIdx;
     }
 
     // Info bar elements
@@ -260,10 +282,10 @@ if (enginesCanvas) {
     ];
     const dots = document.querySelectorAll('.scrolly-dot');
     const header = document.querySelector('.scrolly-header');
-    let currentStep = 0;
+    let activeStep = -1;
 
     function setStep(index) {
-        if (index === currentStep && infoPanels[index]?.classList.contains('active')) return;
+        if (index === activeStep) return;
 
         // Update info panels
         infoPanels.forEach(p => { if (p) p.classList.remove('active'); });
@@ -273,51 +295,49 @@ if (enginesCanvas) {
         dots.forEach(d => d.classList.remove('active'));
         if (dots[index]) dots[index].classList.add('active');
 
-        currentStep = index;
+        activeStep = index;
     }
 
-    function updateInfoBar(progress) {
+    function onScrollUpdate(progress) {
         // Show/hide header
         if (header) {
-            if (progress > 0.02 && progress < 0.95) {
-                header.classList.add('visible');
-            } else {
-                header.classList.remove('visible');
-            }
+            header.classList.toggle('visible', progress > 0.02 && progress < 0.95);
         }
 
-        // Determine which step to show based on scroll progress
-        // 4 steps, evenly distributed across the scroll
-        if (progress < 0.25) setStep(0);
-        else if (progress < 0.50) setStep(1);
-        else if (progress < 0.75) setStep(2);
-        else setStep(3);
+        // Determine which engine (0-3) and local progress within that engine
+        const engineIdx = Math.min(3, Math.floor(progress * 4));
+        const localProgress = (progress * 4) - engineIdx; // 0→1 within each engine
+        const frameIdx = Math.min(FRAME_COUNT - 1, Math.floor(localProgress * FRAME_COUNT));
+
+        // Update step indicator + info panel
+        setStep(engineIdx);
+
+        // Render the correct frame from the correct engine
+        if (engines[engineIdx].loaded) {
+            renderFrame(engineIdx, frameIdx);
+        }
     }
 
-    // Initialize first step
+    // Initialize
     setStep(0);
 
-    // GSAP scroll-driven animation
-    gsap.to(flowObj, {
-        frame: flowFrameCount - 1,
-        snap: "frame",
-        ease: "none",
-        scrollTrigger: {
-            trigger: ".engines-scrollytelling",
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 0.5,
-            onUpdate: (self) => {
-                updateInfoBar(self.progress);
-            }
-        },
-        onUpdate: flowRender
+    // GSAP scroll-driven
+    ScrollTrigger.create({
+        trigger: ".engines-scrollytelling",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        onUpdate: (self) => {
+            onScrollUpdate(self.progress);
+        }
     });
 
     // Handle resize
     window.addEventListener("resize", () => {
-        enginesCanvas.width = 1920;
-        enginesCanvas.height = 1080;
-        flowRender();
+        enginesCanvas.width = 960;
+        enginesCanvas.height = 540;
+        renderFrame(currentEngine, currentFrame);
     });
 }
+
+

@@ -316,15 +316,6 @@ img {
     mix-blend-mode: screen;
 }
 
-/* Show static logo in hero visual area */
-.hero-logo-float {
-    width: 100%;
-    max-width: 400px;
-    border-radius: 32px;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 136, 255, 0.1);
-    animation: float 7s ease-in-out infinite;
-}
-
 /* Removing redundant hero-canvas override */
 
 /* Dark overlay for readability */
@@ -1490,6 +1481,149 @@ img {
     color: var(--text-muted);
 }
 
+/* ========== Team Section ========== */
+.team-section {
+    padding: var(--section-padding);
+    background: var(--bg-void);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 48px;
+}
+
+.team-card {
+    text-align: center;
+    padding: 40px 28px 32px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 212, 255, 0.06);
+}
+
+/* Avatar with animated ring */
+.team-avatar {
+    width: 88px;
+    height: 88px;
+    margin: 0 auto 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(0, 255, 136, 0.1));
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--cyan);
+    letter-spacing: 1px;
+}
+
+.team-avatar::before {
+    content: attr(data-initials);
+}
+
+.team-avatar-ring {
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: conic-gradient(var(--cyan), var(--green), var(--gold), var(--cyan));
+    z-index: -1;
+    opacity: 0.6;
+    animation: ring-spin 6s linear infinite;
+}
+
+@keyframes ring-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Role badges */
+.team-role-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.team-role-badge.green {
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--green);
+    border: 1px solid rgba(0, 255, 136, 0.25);
+}
+
+.team-role-badge.gold {
+    background: rgba(245, 158, 11, 0.1);
+    color: var(--gold);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.team-role-badge.purple {
+    background: rgba(123, 47, 190, 0.1);
+    color: var(--purple);
+    border: 1px solid rgba(123, 47, 190, 0.25);
+}
+
+.team-card h4 {
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    letter-spacing: -0.3px;
+}
+
+.team-title {
+    font-size: 0.78rem;
+    color: var(--cyan);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 12px;
+    opacity: 0.9;
+}
+
+.team-bio {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 16px;
+}
+
+.team-links {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.team-links a {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+}
+
+.team-links a:hover {
+    color: var(--cyan);
+    border-color: var(--cyan);
+    background: rgba(0, 212, 255, 0.08);
+}
+
 /* Footer */
 .footer {
     background: var(--bg-surface);
@@ -1713,5 +1847,18 @@ img {
     .footer-bottom {
         flex-direction: column;
         text-align: center
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .scrolly-infobar-content {
+        padding: 0 20px 24px;
+    }
+
+    .scrolly-header h2 {
+        font-size: 1.1rem;
     }
 }
