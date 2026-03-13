@@ -3,10 +3,10 @@ import React from 'react';
 export default function ProblemStatement() {
     const leaks = [
         { name: "Cafés", icon: "☕", color: "text-[#d8a93f]", borderColor: "border-[#d8a93f]/30", bg: "bg-[#d8a93f]/10", angle: "rotate-[60deg]", delay: "0s" },
-        { name: "Domicilios", icon: "🍔", color: "text-[#f36e53]", borderColor: "border-[#f36e53]/30", bg: "bg-[#f36e53]/10", angle: "rotate-[30deg]", delay: "0.5s" },
-        { name: "Streaming", icon: "📺", color: "text-[#a898c9]", borderColor: "border-[#a898c9]/30", bg: "bg-[#a898c9]/10", angle: "rotate-[0deg]", delay: "1s" },
-        { name: "Compras Imp", icon: "🛍️", color: "text-[#397dc1]", borderColor: "border-[#397dc1]/30", bg: "bg-[#397dc1]/10", angle: "-rotate-[30deg]", delay: "1.5s" },
-        { name: "Transporte", icon: "🚕", color: "text-[#f36e53]", borderColor: "border-[#f36e53]/30", bg: "bg-[#f36e53]/10", angle: "-rotate-[60deg]", delay: "2s" },
+        { name: "Streaming", icon: "📺", color: "text-[#a898c9]", borderColor: "border-[#a898c9]/30", bg: "bg-[#a898c9]/10", angle: "rotate-[30deg]", delay: "0.5s" },
+        { name: "Domicilios", icon: "🍔", color: "text-[#f36e53]", borderColor: "border-[#f36e53]/30", bg: "bg-[#f36e53]/10", angle: "rotate-[0deg]", delay: "1s" },
+        { name: "Transporte", icon: "🚕", color: "text-[#f36e53]", borderColor: "border-[#f36e53]/30", bg: "bg-[#f36e53]/10", angle: "-rotate-[30deg]", delay: "1.5s" },
+        { name: "Compras Imp", icon: "🛍️", color: "text-[#397dc1]", borderColor: "border-[#397dc1]/30", bg: "bg-[#397dc1]/10", angle: "-rotate-[60deg]", delay: "2s" },
     ];
 
     return (
@@ -19,7 +19,7 @@ export default function ProblemStatement() {
                     </span>
                 </h2>
                 <p className="text-white/70 text-lg md:text-xl leading-relaxed">
-                    Pequeños gastos que parecen inofensivos terminan destruyendo tu presupuesto mensual. Lukas AI detecta automáticamente estas fugas.
+                    Pequeños gastos que parecen inofensivos terminan destruyendo tu presupuesto mensual.
                 </p>
             </div>
 
@@ -35,6 +35,21 @@ export default function ProblemStatement() {
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-white/5 rounded-full blur-[30px] -z-10" />
                 </div>
 
+                {/* Lukas AI Floating Warning near wallet */}
+                <div className="absolute top-[30px] md:top-[60px] ml-[200px] md:ml-[340px] z-30 pointer-events-none">
+                    <div className="bg-black/80 border border-[#f36e53]/50 backdrop-blur-xl rounded-xl p-3 shadow-2xl animate-[float_6s_ease-in-out_infinite_0.5s]">
+                        <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-[#f36e53]/20 flex items-center justify-center text-[#f36e53] flex-shrink-0">
+                                ⚠️
+                            </div>
+                            <div>
+                                <p className="text-white text-[10px] uppercase font-bold tracking-wider opacity-70">Lukas AI</p>
+                                <p className="text-[#f36e53] text-sm font-bold leading-tight">Ojo… este mes estás gastando<br />más de lo normal.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {/* The Leaking SVG Particles & Paths */}
                 <div className="absolute top-[80px] md:top-[120px] left-0 right-0 bottom-0 z-10 pointer-events-none overflow-visible">
                     
@@ -42,19 +57,19 @@ export default function ProblemStatement() {
                     <div className="relative w-full h-full">
                         {leaks.map((leak, idx) => (
                             <React.Fragment key={idx}>
-                                {/* Path Line */}
-                                <div className={`absolute top-0 left-1/2 w-0.5 h-[180px] md:h-[260px] bg-gradient-to-b from-white/20 to-transparent origin-top ${leak.angle} -translate-x-1/2`} />
-                                
-                                {/* Animated Coin Drop */}
-                                {/* Using emoji or a gold coin style element for the particle */}
-                                <div 
-                                    className={`absolute top-0 left-1/2 w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#fcd34d] border border-[#f36e53] shadow-[0_0_10px_rgba(243,110,83,0.8)] origin-top ${leak.angle} -translate-x-1/2`}
-                                    style={{
-                                        animation: `leak-drop 3s ease-in infinite ${leak.delay}`
-                                    }}
-                                >
-                                    {/* inner coin detail */ }
-                                    <div className="w-full h-full border border-yellow-700/30 rounded-full" />
+                                <div className={`absolute top-0 left-1/2 origin-top ${leak.angle} -translate-x-1/2`}>
+                                    {/* Path Line */}
+                                    <div className="w-0.5 h-[180px] md:h-[260px] bg-gradient-to-b from-white/20 to-transparent" />
+                                    
+                                    {/* Animated Coin Drop */}
+                                    <div 
+                                        className={`absolute top-0 -left-1.5 md:-left-2 w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#d8a93f] border border-[#f36e53] shadow-[0_0_15px_rgba(216,169,63,0.8)] z-10`}
+                                        style={{
+                                            animation: `leak-drop 2.5s ease-in infinite ${leak.delay}`
+                                        }}
+                                    >
+                                        <div className="w-full h-full border border-yellow-700/30 rounded-full" />
+                                    </div>
                                 </div>
                             </React.Fragment>
                         ))}
