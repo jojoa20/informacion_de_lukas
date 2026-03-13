@@ -20,23 +20,21 @@ interface GraphLink extends d3.SimulationLinkDatum<GraphNode> {
 
 const data = {
     nodes: [
-        { id: "root", group: 1, radius: 60, label: "Ingresos / Quincena" } as GraphNode,
+        { id: "root", group: 1, radius: 70, label: "Ingresos / Quincena" } as GraphNode,
         // Clusters
-        { id: "cafes", group: 2, radius: 40, label: "Cafés", isAlert: true, amount: "$45.000", transactions: 9 } as GraphNode,
-        { id: "streaming", group: 3, radius: 35, label: "Streaming", amount: "$80.000", transactions: 4 } as GraphNode,
-        { id: "domicilio", group: 2, radius: 50, label: "Comida domicilio", isAlert: true, amount: "$210.000", transactions: 7 } as GraphNode,
-        { id: "transporte", group: 4, radius: 45, label: "Transporte", amount: "$120.000", transactions: 15 } as GraphNode,
-        { id: "suscripciones", group: 3, radius: 30, label: "Suscripciones", amount: "$35.000", transactions: 2 } as GraphNode,
-        { id: "compras", group: 2, radius: 45, label: "Compras impulsivas", isAlert: true, amount: "$150.000", transactions: 5 } as GraphNode,
-        { id: "ahorro", group: 5, radius: 55, label: "Ahorro programado", amount: "$500.000", transactions: 1 } as GraphNode,
+        { id: "cafes", group: 2, radius: 45, label: "Cafés", isAlert: true, amount: "$150.000 COP", transactions: 30 } as GraphNode,
+        { id: "streaming", group: 3, radius: 35, label: "Streaming", amount: "$45.000 COP", transactions: 2 } as GraphNode,
+        { id: "domicilios", group: 2, radius: 50, label: "Domicilios", isAlert: true, amount: "$210.000 COP", transactions: 7 } as GraphNode,
+        { id: "transporte", group: 4, radius: 45, label: "Transporte", amount: "$80.000 COP", transactions: 15 } as GraphNode,
+        { id: "suscripciones", group: 3, radius: 30, label: "Suscripciones", amount: "$35.000 COP", transactions: 3 } as GraphNode,
+        { id: "ahorro", group: 5, radius: 55, label: "Ahorro programado", amount: "$500.000 COP", transactions: 1 } as GraphNode,
     ],
     links: [
         { source: "root", target: "cafes" },
         { source: "root", target: "streaming" },
-        { source: "root", target: "domicilio" },
+        { source: "root", target: "domicilios" },
         { source: "root", target: "transporte" },
         { source: "root", target: "suscripciones" },
-        { source: "root", target: "compras" },
         { source: "root", target: "ahorro" }
     ] as GraphLink[]
 };
@@ -45,17 +43,17 @@ const data = {
 const generateChildren = (parentId: string, count: number, group: number, isAlert: boolean = false) => {
     for (let i = 0; i < count; i++) {
         const childId = `${parentId}_child_${i}`;
-        data.nodes.push({ id: childId, group, radius: Math.random() * 5 + 3, label: "", isAlert } as GraphNode);
+        data.nodes.push({ id: childId, group, radius: Math.random() * 4 + 3, label: "", isAlert } as GraphNode);
         data.links.push({ source: parentId, target: childId });
     }
 };
 
-generateChildren("cafes", 9, 2, true);
-generateChildren("streaming", 4, 3);
-generateChildren("domicilio", 7, 2, true);
+// Generate exactly the requested transaction nodes
+generateChildren("cafes", 30, 2, true);
+generateChildren("streaming", 2, 3);
+generateChildren("domicilios", 7, 2, true);
 generateChildren("transporte", 15, 4);
-generateChildren("suscripciones", 2, 3);
-generateChildren("compras", 5, 2, true);
+generateChildren("suscripciones", 3, 3);
 generateChildren("ahorro", 1, 5);
 
 export default function LeakBuster() {
@@ -72,7 +70,7 @@ export default function LeakBuster() {
         if (!svgRef.current || !containerRef.current) return;
 
         const width = containerRef.current.clientWidth;
-        const height = 600;
+        const height = 650;
 
         const svg = d3.select(svgRef.current)
             .attr("width", width)
@@ -81,12 +79,12 @@ export default function LeakBuster() {
 
         svg.selectAll("*").remove(); // Clear previous render
 
-        // Color definitions
+        // Color definitions matching the visual identity
         const colors = {
-            root: "#a898c9", // cyan
-            alert: "#f36e53", // warning orange/red for hormiga
-            normal: "#397dc1", // standard purple
-            healthy: "#d8a93f" // success green
+            root: "#a898c9", // violet
+            alert: "#f36e53", // coral red / warning
+            normal: "#397dc1", // primary blue
+            healthy: "#d8a93f" // gold
         };
 
         const getNodeColor = (d: GraphNode) => {
@@ -99,15 +97,15 @@ export default function LeakBuster() {
         const simulation = d3.forceSimulation<GraphNode>(data.nodes as GraphNode[])
             .force("link", d3.forceLink<GraphNode, GraphLink>(data.links).id(d => d.id).distance(d => {
                 // Distance depends on if it's linking to a cluster parent or a tiny transaction child
-                return (d.source as GraphNode).id === "root" ? 180 : 30;
+                return (d.source as GraphNode).id === "root" ? 200 : 35;
             }))
-            .force("charge", d3.forceManyBody<GraphNode>().strength((d) => d.id === "root" ? -1000 : (d.label ? -300 : -30)))
+            .force("charge", d3.forceManyBody<GraphNode>().strength((d) => d.id === "root" ? -1200 : (d.label ? -400 : -40)))
             .force("center", d3.forceCenter(width / 2, height / 2))
-            .force("collide", d3.forceCollide<GraphNode>().radius((d) => d.radius + 5).iterations(2));
+            .force("collide", d3.forceCollide<GraphNode>().radius((d) => d.radius + 6).iterations(3));
 
         // Links
         const link = svg.append("g")
-            .attr("stroke", "rgba(255,255,255,0.1)")
+            .attr("stroke", "rgba(255,255,255,0.15)")
             .attr("stroke-opacity", 0.6)
             .selectAll("line")
             .data(data.links)
@@ -117,10 +115,10 @@ export default function LeakBuster() {
         // Nodes group
         const nodeGroup = svg.append("g");
 
-        // Defs for glow filter on alerts
+        // Defs for glow filter
         const defs = svg.append("defs");
         const filter = defs.append("filter").attr("id", "glow");
-        filter.append("feGaussianBlur").attr("stdDeviation", "8").attr("result", "coloredBlur");
+        filter.append("feGaussianBlur").attr("stdDeviation", "6").attr("result", "coloredBlur");
         const feMerge = filter.append("feMerge");
         feMerge.append("feMergeNode").attr("in", "coloredBlur");
         feMerge.append("feMergeNode").attr("in", "SourceGraphic");
@@ -133,8 +131,8 @@ export default function LeakBuster() {
             .attr("fill", d => getNodeColor(d))
             .attr("stroke", d => d.id === "root" ? "rgba(168,152,201,0.5)" : "none")
             .attr("stroke-width", 4)
-            .attr("class", d => d.isAlert && d.label ? "animate-pulse" : "transition-transform duration-300 hover:scale-110")
-            .style("filter", d => d.isAlert && d.label ? "url(#glow)" : "none")
+            .attr("class", d => d.isAlert && d.label ? "animate-[pulse_2s_cubic-bezier(0.4,0,0.6,1)_infinite]" : "transition-transform duration-500 hover:scale-[1.15]")
+            .style("filter", d => d.isAlert && d.label ? "url(#glow)" : "url(#glow)") // Soft glow to all, intense to alert
             .style("cursor", d => d.label ? "pointer" : "default")
             .on("mouseover", (event, d) => {
                 if (!d.label) return;
@@ -144,15 +142,14 @@ export default function LeakBuster() {
                     y: event.pageY,
                     node: d
                 });
-                // Highlight logic
-                d3.select(event.currentTarget).attr("stroke", "rgba(255,255,255,0.5)").attr("stroke-width", 4);
+                d3.select(event.currentTarget).attr("stroke", "rgba(255,255,255,0.6)").attr("stroke-width", 5);
             })
             .on("mousemove", (event) => {
                 setTooltip(prev => ({ ...prev, x: event.pageX, y: event.pageY }));
             })
             .on("mouseout", (event, d) => {
                 setTooltip(prev => ({ ...prev, visible: false }));
-                d3.select(event.currentTarget).attr("stroke", d.id === "root" ? "rgba(168,152,201,0.5)" : "none");
+                d3.select(event.currentTarget).attr("stroke", d.id === "root" ? "rgba(168,152,201,0.5)" : "none").attr("stroke-width", 4);
             })
             .call(d3.drag<SVGCircleElement, GraphNode>()
                 .on("start", (event, d) => {
@@ -178,21 +175,25 @@ export default function LeakBuster() {
             .join("text")
             .text(d => d.label)
             .attr("text-anchor", "middle")
-            .attr("dy", d => d.id === "root" ? 5 : d.radius + 15)
-            .attr("fill", d => d.id === "root" ? "#1e1b4b" : "rgba(255,255,255,0.8)")
-            .attr("font-size", d => d.id === "root" ? "12px" : "11px")
-            .attr("font-weight", d => d.id === "root" ? "bold" : "600")
+            .attr("dy", d => d.id === "root" ? 5 : d.radius + 18)
+            .attr("fill", d => d.id === "root" ? "#1e1b4b" : "rgba(255,255,255,0.9)")
+            .attr("font-size", d => d.id === "root" ? "14px" : "13px")
+            .attr("font-weight", d => d.id === "root" ? "800" : "600")
+            .style("text-shadow", "0px 2px 4px rgba(0,0,0,0.8)")
             .style("pointer-events", "none");
 
+        // Small inner icon for the root source node
         const rootIcon = svg.append("text")
             .datum(data.nodes[0])
             .text("💰")
             .attr("text-anchor", "middle")
             .attr("dy", -10)
-            .attr("font-size", "24px")
+            .attr("font-size", "28px")
             .style("pointer-events", "none");
 
+        // Animation slow drift
         simulation.on("tick", () => {
+            // Apply a very slight continuous gentle rotation/drift if needed, but force layout handles the organic feeling well
             link
                 .attr("x1", d => (d.source as GraphNode).x!)
                 .attr("y1", d => (d.source as GraphNode).y!)
@@ -218,64 +219,54 @@ export default function LeakBuster() {
     }, []);
 
     return (
-        <section className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 mt-12 bg-black/20">
+        <section className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 mt-12 bg-transparent">
             <div className="text-center mb-10 max-w-3xl mx-auto">
-                <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">
-                    <span className="text-white">Lukas AI </span>
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a898c9] to-[#397dc1]">
-                        Leak Buster
-                    </span>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight">
+                    Lukas AI Leak Buster
                 </h2>
-                <p className="text-white/60 text-lg">
-                    Explora la red de inteligencia artificial que visualiza, clasifica y audita cada transacción de tu sistema financiero en tiempo real.
-                    Interactúa con los nodos para analizar tus hábitos.
+                <p className="text-white/70 text-lg md:text-xl leading-relaxed">
+                    Visualiza cómo Lukas detecta las fugas y gastos hormiga en tiempo real, agrupando cada transacción.
                 </p>
             </div>
 
-            <div className="relative w-full rounded-3xl border border-white/10 bg-[#0f172a] overflow-hidden shadow-2xl" ref={containerRef}>
-                <div className="absolute top-6 left-6 flex items-center gap-4 z-10 bg-black/50 backdrop-blur-md px-4 py-3 rounded-xl border border-white/10">
-                    <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 rounded-full bg-[#f36e53] animate-pulse"></span>
-                        <span className="text-xs text-white/80 font-medium tracking-wide">Gastos Hormiga (Riesgo)</span>
-                    </div>
-                    <div className="w-px h-4 bg-white/20" />
-                    <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 rounded-full bg-[#d8a93f]"></span>
-                        <span className="text-xs text-white/80 font-medium tracking-wide">Saludable / Ahorro</span>
-                    </div>
-                </div>
-
+            <div className="relative w-full rounded-[2.5rem] border border-white/10 bg-gradient-to-b from-[#0f172a]/80 to-[#1e1b4b]/80 backdrop-blur-2xl overflow-hidden shadow-[0_0_60px_rgba(33,66,141,0.2)]" ref={containerRef}>
+                
                 {/* D3 SVG Container */}
-                <svg ref={svgRef} className="w-full min-h-[600px] cursor-grab active:cursor-grabbing" />
+                <svg ref={svgRef} className="w-full min-h-[650px] cursor-grab active:cursor-grabbing" />
 
-                {/* Custom React Tooltip */}
+                {/* Custom React Tooltip Exactly Matching Requirements */}
                 {tooltip.visible && tooltip.node && (
                     <div
-                        className="fixed z-50 pointer-events-none transform -translate-x-1/2 -translate-y-full pb-4"
+                        className="fixed z-50 pointer-events-none transform -translate-x-1/2 -translate-y-[120%]"
                         style={{ left: tooltip.x, top: tooltip.y }}
                     >
-                        <div className={`backdrop-blur-xl border ${tooltip.node.isAlert ? 'border-[#f36e53]/50 bg-black/80 shadow-[0_0_20px_rgba(243,110,83,0.3)]' : 'border-white/20 bg-black/80'} rounded-xl p-4 min-w-[200px]`}>
+                        <div className={`backdrop-blur-2xl border ${tooltip.node.isAlert ? 'border-[#f36e53] bg-black/90 shadow-[0_0_30px_rgba(243,110,83,0.4)]' : 'border-white/20 bg-black/80 shadow-2xl'} rounded-2xl p-5 min-w-[240px]`}>
                             {tooltip.node.isAlert && (
-                                <div className="text-xs font-bold text-[#f36e53] uppercase tracking-wider mb-2 flex items-center gap-2">
-                                    <span className="w-2 h-2 rounded-full bg-[#f36e53] animate-pulse" />
+                                <div className="text-sm font-black text-[#f36e53] tracking-wide mb-3 flex items-center gap-2">
+                                    <span className="w-3 h-3 rounded-full bg-[#f36e53] animate-pulse" />
                                     Cluster alerta: Gastos hormiga
                                 </div>
                             )}
+                            
                             {tooltip.node.id === "root" ? (
                                 <>
-                                    <h4 className="text-lg font-bold text-white mb-1">{tooltip.node.label}</h4>
-                                    <p className="text-sm text-lukas-success font-medium">Motor de análisis activo</p>
+                                    <h4 className="text-xl font-bold text-white mb-2">{tooltip.node.label}</h4>
+                                    <p className="text-sm text-[#a898c9] font-medium">Origen de los fondos auditados</p>
                                 </>
                             ) : (
                                 <>
-                                    <h4 className="text-lg font-bold text-white mb-1">{tooltip.node.label}</h4>
-                                    <div className="flex justify-between items-center text-sm mb-1">
-                                        <span className="text-white/60">Monto:</span>
-                                        <span className="text-white font-medium">{tooltip.node.amount}</span>
-                                    </div>
-                                    <div className="flex justify-between items-center text-sm">
-                                        <span className="text-white/60">Transacciones:</span>
-                                        <span className="text-white font-medium">{tooltip.node.transactions}</span>
+                                    {!tooltip.node.isAlert && (
+                                        <h4 className="text-xl font-bold text-white mb-3">{tooltip.node.label}</h4>
+                                    )}
+                                    <div className="flex flex-col gap-2">
+                                        <div className="flex justify-between items-center text-sm">
+                                            <span className="text-white/70">Monto:</span>
+                                            <span className="text-white font-bold">{tooltip.node.amount}</span>
+                                        </div>
+                                        <div className="flex justify-between items-center text-sm">
+                                            <span className="text-white/70">Transacciones:</span>
+                                            <span className="text-white font-bold">{tooltip.node.transactions} {tooltip.node.transactions === 1 ? 'transacción' : 'transacciones'}</span>
+                                        </div>
                                     </div>
                                 </>
                             )}
