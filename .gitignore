@@ -1,15 +1,14 @@
-# OS
-.DS_Store
-Thumbs.db
-
-# Editor
-.vscode/
-.idea/
-
-# Gemini/Agent
-.gemini/
-.agent/
-
-# Node (por si se usa después)
-node_modules/
-dist/
+node_modules
+.vercel
+dist
+.env
+*.log
+build_error.log
+build_error_utf8.log
+git_dirs.txt
+git_log_leonardo.txt
+git_log_leonardo_utf8.txt
+git_stat_leonardo_utf8.txt
+git_tree_leonardo_utf8.txt
+git_log_dev_leonardo_utf8.txt
+git_log_2_origin_leonardo.txt

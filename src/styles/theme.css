@@ -1,0 +1,502 @@
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --font-size: 16px;
+  --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
+  
+  /* Lukas AI - Deep Neon Palette */
+  --lukas-deep: #21428d;
+  --lukas-mid: #1e1b4b;
+  --lukas-primary: #397dc1;
+  --lukas-alert: #f36e53;
+  --lukas-success: #d8a93f;
+  --purple-accent: #a898c9;
+  --purple-vibrant: #6b4de6;
+  
+  /* Base Colors */
+  --background: #0f172a;
+  --foreground: #ffffff;
+  --white-pure: #ffffff;
+  --white-90: rgba(255, 255, 255, 0.9);
+  --white-70: rgba(255, 255, 255, 0.7);
+  --white-50: rgba(255, 255, 255, 0.5);
+  --white-30: rgba(255, 255, 255, 0.3);
+  --white-10: rgba(255, 255, 255, 0.1);
+  --white-5: rgba(255, 255, 255, 0.05);
+  
+  /* Theme Colors */
+  --card: rgba(0, 0, 0, 0.6);
+  --card-foreground: var(--white-90);
+  --popover: rgba(0, 0, 0, 0.8);
+  --popover-foreground: var(--white-90);
+  --primary: var(--lukas-primary);
+  --primary-foreground: var(--white-pure);
+  --secondary: rgba(255, 255, 255, 0.05);
+  --secondary-foreground: var(--white-pure);
+  --muted: rgba(255, 255, 255, 0.08);
+  --muted-foreground: var(--white-50);
+  --accent: var(--lukas-primary);
+  --accent-foreground: var(--white-pure);
+  --destructive: var(--lukas-alert);
+  --destructive-foreground: var(--white-pure);
+  --border: rgba(255, 255, 255, 0.1);
+  --input: transparent;
+  --input-background: rgba(255, 255, 255, 0.05);
+  --switch-background: rgba(255, 255, 255, 0.2);
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: var(--lukas-primary);
+  
+  /* Chart Colors */
+  --chart-1: var(--lukas-primary);
+  --chart-2: var(--lukas-success);
+  --chart-3: var(--lukas-alert);
+  --chart-4: var(--purple-accent);
+  --chart-5: var(--purple-vibrant);
+  
+  --radius: 0.75rem;
+  
+  /* Sidebar */
+  --sidebar: rgba(0, 0, 0, 0.6);
+  --sidebar-foreground: var(--white-90);
+  --sidebar-primary: var(--lukas-primary);
+  --sidebar-primary-foreground: var(--white-pure);
+  --sidebar-accent: rgba(57, 125, 193, 0.1);
+  --sidebar-accent-foreground: var(--lukas-primary);
+  --sidebar-border: var(--white-10);
+  --sidebar-ring: var(--lukas-primary);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* Custom Lukas Deep Neon Colors */
+  --color-lukas-deep: #21428d;
+  --color-lukas-mid: #1e1b4b;
+  --color-lukas-primary: #397dc1;
+  --color-lukas-alert: #f36e53;
+  --color-lukas-success: #d8a93f;
+  --color-purple-accent: #a898c9;
+  --color-purple-vibrant: #6b4de6;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    font-size: var(--font-size);
+    font-family: var(--font-family);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    color: var(--foreground);
+    /* Degradado radial Lukas Deep Neon - Fondo fijo */
+    background-image: radial-gradient(circle at 50% 0%, #21428d 0%, #1e1b4b 50%, #0f172a 100%);
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  /**
+  * Default typography styles for HTML elements (h1-h4, p, label, button, input).
+  * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
+  */
+
+  h1 {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  h4 {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  label {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  button {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.5;
+  }
+
+  input {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+  }
+}
+
+@layer utilities {
+  .bg-gradient-radial {
+    background-image: radial-gradient(var(--tw-gradient-stops));
+  }
+  
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* ==============================
+     LUKAS DEEP NEON - TEXT GRADIENTS
+     ============================== */
+  
+  .text-gradient-lukas {
+    background: linear-gradient(to right, #397dc1, #a898c9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-gradient-lukas-alt {
+    background: linear-gradient(135deg, #397dc1 0%, #6b4de6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* ==============================
+     BOTONES PREMIUM
+     ============================== */
+  
+  .btn-primary {
+    background: linear-gradient(to right, #397dc1, #6b4de6);
+    color: white;
+    box-shadow: 0 0 20px rgba(57, 125, 193, 0.4);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    box-shadow: 0 0 30px rgba(57, 125, 193, 0.6);
+    transform: translateY(-1px);
+  }
+  
+  .btn-secondary-glass {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-secondary-glass:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-1px);
+  }
+  
+  /* ==============================
+     GLASSMORPHISM - TARJETAS
+     ============================== */
+  
+  .glass-card {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .glass-card-strong {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Tarjeta de alerta con glow rojo/naranja */
+  .glass-card-alert {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(243, 110, 83, 0.5);
+    box-shadow: 0 0 30px rgba(243, 110, 83, 0.2);
+  }
+  
+  /* ==============================
+     GLOW EFFECTS
+     ============================== */
+  
+  .glow-primary {
+    box-shadow: 0 0 20px rgba(57, 125, 193, 0.3), 0 0 40px rgba(57, 125, 193, 0.1);
+  }
+  
+  .glow-primary-strong {
+    box-shadow: 0 0 20px rgba(57, 125, 193, 0.5), 0 0 40px rgba(57, 125, 193, 0.2), 0 0 60px rgba(57, 125, 193, 0.1);
+  }
+  
+  .glow-success {
+    box-shadow: 0 0 20px rgba(216, 169, 63, 0.3), 0 0 40px rgba(216, 169, 63, 0.1);
+  }
+  
+  .glow-alert {
+    box-shadow: 0 0 20px rgba(243, 110, 83, 0.3), 0 0 40px rgba(243, 110, 83, 0.1);
+  }
+  
+  .glow-hover {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  
+  .glow-hover:hover {
+    box-shadow: 0 0 20px rgba(57, 125, 193, 0.4), 0 0 40px rgba(57, 125, 193, 0.15);
+    transform: translateY(-6px);
+  }
+  
+  /* ==============================
+     BACKGROUNDS - CIRCUIT / POLY GRID
+     ============================== */
+  
+  .bg-circuit {
+    background-color: #0f172a;
+    background-image: 
+      linear-gradient(rgba(57, 125, 193, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(57, 125, 193, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: drift 20s linear infinite;
+  }
+  
+  .bg-poly-grid {
+    background-color: #0f172a;
+    background-image: 
+      linear-gradient(30deg, rgba(57, 125, 193, 0.05) 12%, transparent 12.5%, transparent 87%, rgba(57, 125, 193, 0.05) 87.5%, rgba(57, 125, 193, 0.05)),
+      linear-gradient(150deg, rgba(57, 125, 193, 0.05) 12%, transparent 12.5%, transparent 87%, rgba(57, 125, 193, 0.05) 87.5%, rgba(57, 125, 193, 0.05)),
+      linear-gradient(30deg, rgba(57, 125, 193, 0.05) 12%, transparent 12.5%, transparent 87%, rgba(57, 125, 193, 0.05) 87.5%, rgba(57, 125, 193, 0.05)),
+      linear-gradient(150deg, rgba(57, 125, 193, 0.05) 12%, transparent 12.5%, transparent 87%, rgba(57, 125, 193, 0.05) 87.5%, rgba(57, 125, 193, 0.05));
+    background-size: 80px 140px;
+    background-position: 0 0, 0 0, 40px 70px, 40px 70px;
+  }
+  
+  /* ==============================
+     ANIMACIONES PERSONALIZADAS
+     ============================== */
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+    }
+    50% {
+      transform: translateY(-15px) rotateX(8deg) rotateY(-8deg);
+    }
+  }
+  
+  @keyframes data-flow-y {
+    0% {
+      transform: translateY(0px);
+    }
+    100% {
+      transform: translateY(2000px);
+    }
+  }
+  
+  @keyframes data-flow-x {
+    0% {
+      transform: translateX(0px);
+    }
+    100% {
+      transform: translateX(2000px);
+    }
+  }
+  
+  @keyframes fade-in-up {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.15);
+    }
+  }
+  
+  @keyframes drift {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 0 60px;
+    }
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+  
+  /* Clases de animación */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-float-slow {
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  .animate-data-flow-y {
+    animation: data-flow-y 10s linear infinite;
+  }
+  
+  .animate-data-flow-x {
+    animation: data-flow-x 10s linear infinite;
+  }
+  
+  .animate-fade-in-up {
+    animation: fade-in-up 0.5s ease-out forwards;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 8s ease-in-out infinite;
+  }
+  
+  .animate-drift {
+    animation: drift 20s linear infinite;
+  }
+  
+  /* ==============================
+     BORDES NEON ANIMADOS
+     ============================== */
+  
+  .neon-border {
+    position: relative;
+    border: 1px solid rgba(57, 125, 193, 0.3);
+  }
+  
+  .neon-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(90deg, #397dc1, #a898c9, #397dc1);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .neon-border:hover::before {
+    opacity: 1;
+  }
+  
+  /* ==============================
+     UTILIDADES ADICIONALES
+     ============================== */
+  
+  /* Smooth transitions para todos los elementos interactivos */
+  .transition-premium {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Tracking tight para títulos */
+  .tracking-tight {
+    letter-spacing: -0.025em;
+  }
+}
