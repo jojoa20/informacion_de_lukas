@@ -83,10 +83,10 @@ export default function LeakBuster() {
 
         // Color definitions
         const colors = {
-            root: "#4cc9f0", // cyan
-            alert: "#ff7a59", // warning orange/red for hormiga
-            normal: "#7c5cff", // standard purple
-            healthy: "#6ee7b7" // success green
+            root: "#a898c9", // cyan
+            alert: "#f36e53", // warning orange/red for hormiga
+            normal: "#397dc1", // standard purple
+            healthy: "#d8a93f" // success green
         };
 
         const getNodeColor = (d: GraphNode) => {
@@ -131,7 +131,7 @@ export default function LeakBuster() {
             .join("circle")
             .attr("r", d => d.radius)
             .attr("fill", d => getNodeColor(d))
-            .attr("stroke", d => d.id === "root" ? "rgba(76,201,240,0.5)" : "none")
+            .attr("stroke", d => d.id === "root" ? "rgba(168,152,201,0.5)" : "none")
             .attr("stroke-width", 4)
             .attr("class", d => d.isAlert && d.label ? "animate-pulse" : "transition-transform duration-300 hover:scale-110")
             .style("filter", d => d.isAlert && d.label ? "url(#glow)" : "none")
@@ -152,7 +152,7 @@ export default function LeakBuster() {
             })
             .on("mouseout", (event, d) => {
                 setTooltip(prev => ({ ...prev, visible: false }));
-                d3.select(event.currentTarget).attr("stroke", d.id === "root" ? "rgba(76,201,240,0.5)" : "none");
+                d3.select(event.currentTarget).attr("stroke", d.id === "root" ? "rgba(168,152,201,0.5)" : "none");
             })
             .call(d3.drag<SVGCircleElement, GraphNode>()
                 .on("start", (event, d) => {
@@ -179,7 +179,7 @@ export default function LeakBuster() {
             .text(d => d.label)
             .attr("text-anchor", "middle")
             .attr("dy", d => d.id === "root" ? 5 : d.radius + 15)
-            .attr("fill", d => d.id === "root" ? "#120c2c" : "rgba(255,255,255,0.8)")
+            .attr("fill", d => d.id === "root" ? "#1e1b4b" : "rgba(255,255,255,0.8)")
             .attr("font-size", d => d.id === "root" ? "12px" : "11px")
             .attr("font-weight", d => d.id === "root" ? "bold" : "600")
             .style("pointer-events", "none");
@@ -222,7 +222,7 @@ export default function LeakBuster() {
             <div className="text-center mb-10 max-w-3xl mx-auto">
                 <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">
                     <span className="text-white">Lukas AI </span>
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4cc9f0] to-[#7c5cff]">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a898c9] to-[#397dc1]">
                         Leak Buster
                     </span>
                 </h2>
@@ -232,15 +232,15 @@ export default function LeakBuster() {
                 </p>
             </div>
 
-            <div className="relative w-full rounded-3xl border border-white/10 bg-[#0a0618] overflow-hidden shadow-2xl" ref={containerRef}>
+            <div className="relative w-full rounded-3xl border border-white/10 bg-[#0f172a] overflow-hidden shadow-2xl" ref={containerRef}>
                 <div className="absolute top-6 left-6 flex items-center gap-4 z-10 bg-black/50 backdrop-blur-md px-4 py-3 rounded-xl border border-white/10">
                     <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 rounded-full bg-[#ff7a59] animate-pulse"></span>
+                        <span className="w-3 h-3 rounded-full bg-[#f36e53] animate-pulse"></span>
                         <span className="text-xs text-white/80 font-medium tracking-wide">Gastos Hormiga (Riesgo)</span>
                     </div>
                     <div className="w-px h-4 bg-white/20" />
                     <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 rounded-full bg-[#6ee7b7]"></span>
+                        <span className="w-3 h-3 rounded-full bg-[#d8a93f]"></span>
                         <span className="text-xs text-white/80 font-medium tracking-wide">Saludable / Ahorro</span>
                     </div>
                 </div>
@@ -254,10 +254,10 @@ export default function LeakBuster() {
                         className="fixed z-50 pointer-events-none transform -translate-x-1/2 -translate-y-full pb-4"
                         style={{ left: tooltip.x, top: tooltip.y }}
                     >
-                        <div className={`backdrop-blur-xl border ${tooltip.node.isAlert ? 'border-[#ff7a59]/50 bg-black/80 shadow-[0_0_20px_rgba(255,122,89,0.3)]' : 'border-white/20 bg-black/80'} rounded-xl p-4 min-w-[200px]`}>
+                        <div className={`backdrop-blur-xl border ${tooltip.node.isAlert ? 'border-[#f36e53]/50 bg-black/80 shadow-[0_0_20px_rgba(243,110,83,0.3)]' : 'border-white/20 bg-black/80'} rounded-xl p-4 min-w-[200px]`}>
                             {tooltip.node.isAlert && (
-                                <div className="text-xs font-bold text-[#ff7a59] uppercase tracking-wider mb-2 flex items-center gap-2">
-                                    <span className="w-2 h-2 rounded-full bg-[#ff7a59] animate-pulse" />
+                                <div className="text-xs font-bold text-[#f36e53] uppercase tracking-wider mb-2 flex items-center gap-2">
+                                    <span className="w-2 h-2 rounded-full bg-[#f36e53] animate-pulse" />
                                     Cluster alerta: Gastos hormiga
                                 </div>
                             )}

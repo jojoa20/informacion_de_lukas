@@ -2,11 +2,11 @@ import React from 'react';
 
 export default function ProblemStatement() {
     const leaks = [
-        { name: "Cafés", icon: "☕", color: "text-[#6ee7b7]", borderColor: "border-[#6ee7b7]/30", bg: "bg-[#6ee7b7]/10", angle: "rotate-[60deg]", delay: "0s" },
-        { name: "Domicilios", icon: "🍔", color: "text-[#ff7a59]", borderColor: "border-[#ff7a59]/30", bg: "bg-[#ff7a59]/10", angle: "rotate-[30deg]", delay: "0.5s" },
-        { name: "Streaming", icon: "📺", color: "text-[#4cc9f0]", borderColor: "border-[#4cc9f0]/30", bg: "bg-[#4cc9f0]/10", angle: "rotate-[0deg]", delay: "1s" },
-        { name: "Compras Imp", icon: "🛍️", color: "text-[#7c5cff]", borderColor: "border-[#7c5cff]/30", bg: "bg-[#7c5cff]/10", angle: "-rotate-[30deg]", delay: "1.5s" },
-        { name: "Transporte", icon: "🚕", color: "text-[#f59e0b]", borderColor: "border-[#f59e0b]/30", bg: "bg-[#f59e0b]/10", angle: "-rotate-[60deg]", delay: "2s" },
+        { name: "Cafés", icon: "☕", color: "text-[#d8a93f]", borderColor: "border-[#d8a93f]/30", bg: "bg-[#d8a93f]/10", angle: "rotate-[60deg]", delay: "0s" },
+        { name: "Domicilios", icon: "🍔", color: "text-[#f36e53]", borderColor: "border-[#f36e53]/30", bg: "bg-[#f36e53]/10", angle: "rotate-[30deg]", delay: "0.5s" },
+        { name: "Streaming", icon: "📺", color: "text-[#a898c9]", borderColor: "border-[#a898c9]/30", bg: "bg-[#a898c9]/10", angle: "rotate-[0deg]", delay: "1s" },
+        { name: "Compras Imp", icon: "🛍️", color: "text-[#397dc1]", borderColor: "border-[#397dc1]/30", bg: "bg-[#397dc1]/10", angle: "-rotate-[30deg]", delay: "1.5s" },
+        { name: "Transporte", icon: "🚕", color: "text-[#f36e53]", borderColor: "border-[#f36e53]/30", bg: "bg-[#f36e53]/10", angle: "-rotate-[60deg]", delay: "2s" },
     ];
 
     return (
@@ -48,7 +48,7 @@ export default function ProblemStatement() {
                                 {/* Animated Coin Drop */}
                                 {/* Using emoji or a gold coin style element for the particle */}
                                 <div 
-                                    className={`absolute top-0 left-1/2 w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#fcd34d] border border-[#f59e0b] shadow-[0_0_10px_rgba(245,158,11,0.8)] origin-top ${leak.angle} -translate-x-1/2`}
+                                    className={`absolute top-0 left-1/2 w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#fcd34d] border border-[#f36e53] shadow-[0_0_10px_rgba(243,110,83,0.8)] origin-top ${leak.angle} -translate-x-1/2`}
                                     style={{
                                         animation: `leak-drop 3s ease-in infinite ${leak.delay}`
                                     }}

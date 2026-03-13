@@ -53,7 +53,7 @@ export default function LeakDetection() {
                                 </div>
                                 <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden relative">
                                     <div
-                                        className={`absolute top-0 left-0 h-full rounded-full transition-all duration-1000 ease-out ${exp.alert ? 'bg-gradient-to-r from-orange-500 to-lukas-alert shadow-[0_0_10px_rgba(255,122,89,0.8)]' : 'bg-lukas-primary'
+                                        className={`absolute top-0 left-0 h-full rounded-full transition-all duration-1000 ease-out ${exp.alert ? 'bg-gradient-to-r from-orange-500 to-lukas-alert shadow-[0_0_10px_rgba(243,110,83,0.8)]' : 'bg-lukas-primary'
                                             }`}
                                         style={{ width: exp.width }}
                                     />

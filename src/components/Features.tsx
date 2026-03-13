@@ -44,7 +44,7 @@ export default function Features() {
                 {features.map((feature, i) => (
                     <div
                         key={i}
-                        className={`relative p-8 rounded-3xl bg-[#1a1336] border border-white/5 hover:border-lukas-primary/50 transition-colors group overflow-hidden ${feature.span}`}
+                        className={`relative p-8 rounded-3xl bg-[#1e1b4b] border border-white/5 hover:border-lukas-primary/50 transition-colors group overflow-hidden ${feature.span}`}
                     >
                         {/* Background glowing orb on hover */}
                         <div className="absolute -inset-20 bg-lukas-primary/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />

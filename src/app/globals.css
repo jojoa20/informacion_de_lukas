@@ -2,16 +2,16 @@
 
 @theme {
   --font-sans: var(--font-inter);
-  --color-lukas-deep: #120c2c;
-  --color-lukas-mid: #1f1445;
+  --color-lukas-deep: #21428d;
+  --color-lukas-mid: #1e1b4b;
   --color-lukas-slate: #0f172a;
-  --color-lukas-primary: #7c5cff;
-  --color-lukas-alert: #ff7a59;
-  --color-lukas-success: #6ee7b7;
+  --color-lukas-primary: #397dc1;
+  --color-lukas-alert: #f36e53;
+  --color-lukas-success: #d8a93f;
 }
 
 :root {
-  --background: #120c2c;
+  --background: #0f172a;
   --foreground: #ffffff;
 }
 
@@ -21,7 +21,7 @@ html {
 
 body {
   background-color: var(--background);
-  background-image: radial-gradient(circle at 50% 0%, #1f1445 0%, #120c2c 50%, #0f172a 100%);
+  background-image: radial-gradient(circle at 50% 0%, #21428d 0%, #1e1b4b 50%, #0f172a 100%);
   background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-inter), sans-serif;

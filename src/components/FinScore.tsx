@@ -10,27 +10,27 @@ export default function FinScore() {
     const getScoreData = (currentScore: number) => {
         if (currentScore < 400) {
             return {
-                color: "#ff7a59", // Red/Orange alert
-                colorClass: "text-[#ff7a59]",
-                glowClass: "shadow-[0_0_30px_rgba(255,122,89,0.3)]",
+                color: "#f36e53", // Red/Orange alert
+                colorClass: "text-[#f36e53]",
+                glowClass: "shadow-[0_0_30px_rgba(243,110,83,0.3)]",
                 text: "Estás en modo supervivencia.",
-                gradient: "from-[#ff7a59] to-[#ff4b4b]"
+                gradient: "from-[#f36e53] to-[#ff4b4b]"
             };
         } else if (currentScore < 700) {
             return {
-                color: "#f59e0b", // Orange/Yellow
-                colorClass: "text-[#f59e0b]",
-                glowClass: "shadow-[0_0_30px_rgba(245,158,11,0.3)]",
+                color: "#f36e53", // Orange/Yellow
+                colorClass: "text-[#f36e53]",
+                glowClass: "shadow-[0_0_30px_rgba(243,110,83,0.3)]",
                 text: "Vas mejorando, pero todavía hay fugas.",
-                gradient: "from-[#f59e0b] to-[#fbbf24]"
+                gradient: "from-[#f36e53] to-[#fbbf24]"
             };
         } else {
             return {
-                color: "#6ee7b7", // Success Green
-                colorClass: "text-[#6ee7b7]",
-                glowClass: "shadow-[0_0_30px_rgba(110,231,183,0.3)]",
+                color: "#d8a93f", // Success Green
+                colorClass: "text-[#d8a93f]",
+                glowClass: "shadow-[0_0_30px_rgba(216,169,63,0.3)]",
                 text: "Finanzas nivel rey.",
-                gradient: "from-[#6ee7b7] to-[#10b981]"
+                gradient: "from-[#d8a93f] to-[#10b981]"
             };
         }
     };
@@ -70,14 +70,14 @@ export default function FinScore() {
     }, []);
 
     return (
-        <section className="relative py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 bg-[#0a0618]">
+        <section className="relative py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 bg-[#0f172a]">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
                 {/* Text Content */}
                 <div className="order-2 lg:order-1">
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight">
                         <span className="text-white">Tu salud financiera ahora tiene </span>
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6ee7b7] to-[#4cc9f0]">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d8a93f] to-[#a898c9]">
                             puntaje.
                         </span>
                     </h2>
@@ -92,19 +92,19 @@ export default function FinScore() {
                         <div className="flex flex-wrap gap-3">
                             <button
                                 onClick={() => applyAction("Ahorro programado detectado", 30)}
-                                className="text-xs font-semibold px-4 py-2 rounded-xl bg-[#6ee7b7]/10 text-[#6ee7b7] border border-[#6ee7b7]/30 hover:bg-[#6ee7b7]/20 transition-colors"
+                                className="text-xs font-semibold px-4 py-2 rounded-xl bg-[#d8a93f]/10 text-[#d8a93f] border border-[#d8a93f]/30 hover:bg-[#d8a93f]/20 transition-colors"
                             >
                                 + Ahorro programado (+30)
                             </button>
                             <button
                                 onClick={() => applyAction("Racha de ahorro (7 días)", 15)}
-                                className="text-xs font-semibold px-4 py-2 rounded-xl bg-[#4cc9f0]/10 text-[#4cc9f0] border border-[#4cc9f0]/30 hover:bg-[#4cc9f0]/20 transition-colors"
+                                className="text-xs font-semibold px-4 py-2 rounded-xl bg-[#a898c9]/10 text-[#a898c9] border border-[#a898c9]/30 hover:bg-[#a898c9]/20 transition-colors"
                             >
                                 + Racha de ahorro (+15)
                             </button>
                             <button
                                 onClick={() => applyAction("Gasto hormiga recurrente", -20)}
-                                className="text-xs font-semibold px-4 py-2 rounded-xl bg-[#ff7a59]/10 text-[#ff7a59] border border-[#ff7a59]/30 hover:bg-[#ff7a59]/20 transition-colors"
+                                className="text-xs font-semibold px-4 py-2 rounded-xl bg-[#f36e53]/10 text-[#f36e53] border border-[#f36e53]/30 hover:bg-[#f36e53]/20 transition-colors"
                             >
                                 - Gasto hormiga (-20)
                             </button>
@@ -119,7 +119,7 @@ export default function FinScore() {
                                     style={{ opacity: 1 - i * 0.3 }}
                                 >
                                     <span className="text-white/80 text-sm font-medium">{log.text}</span>
-                                    <span className={`text-sm font-bold ${log.type === 'pos' ? 'text-[#6ee7b7]' : 'text-[#ff7a59]'}`}>
+                                    <span className={`text-sm font-bold ${log.type === 'pos' ? 'text-[#d8a93f]' : 'text-[#f36e53]'}`}>
                                         {log.type === 'pos' ? '+' : ''}{log.value}
                                     </span>
                                 </div>
@@ -156,9 +156,9 @@ export default function FinScore() {
                                         <feComposite in="SourceGraphic" in2="blur" operator="over" />
                                     </filter>
                                     <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                        <stop offset="0%" stopColor="#ff7a59" />
-                                        <stop offset="50%" stopColor="#f59e0b" />
-                                        <stop offset="100%" stopColor="#6ee7b7" />
+                                        <stop offset="0%" stopColor="#f36e53" />
+                                        <stop offset="50%" stopColor="#f36e53" />
+                                        <stop offset="100%" stopColor="#d8a93f" />
                                     </linearGradient>
                                 </defs>
 
