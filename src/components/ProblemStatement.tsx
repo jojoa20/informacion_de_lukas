@@ -1,95 +1,188 @@
-import React from 'react';
+"use client";
+
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const CLUSTERS = [
+    { id: 'cafes', label: 'Cafés', icon: '☕', color: '#397dc1' },
+    { id: 'domicilios', label: 'Domicilios', icon: '🍔', color: '#f36e53', isAnomaly: true },
+    { id: 'streaming', label: 'Streaming', icon: '📺', color: '#a898c9' },
+    { id: 'transporte', label: 'Transporte', icon: '🚕', color: '#397dc1' }
+];
 
 export default function ProblemStatement() {
-    const leaks = [
-        { name: "Cafés", icon: "☕", color: "text-[#d8a93f]", borderColor: "border-[#d8a93f]/30", bg: "bg-[#d8a93f]/10", angle: "rotate-[60deg]", delay: "0s" },
-        { name: "Streaming", icon: "📺", color: "text-[#a898c9]", borderColor: "border-[#a898c9]/30", bg: "bg-[#a898c9]/10", angle: "rotate-[30deg]", delay: "0.5s" },
-        { name: "Domicilios", icon: "🍔", color: "text-[#f36e53]", borderColor: "border-[#f36e53]/30", bg: "bg-[#f36e53]/10", angle: "rotate-[0deg]", delay: "1s" },
-        { name: "Transporte", icon: "🚕", color: "text-[#f36e53]", borderColor: "border-[#f36e53]/30", bg: "bg-[#f36e53]/10", angle: "-rotate-[30deg]", delay: "1.5s" },
-        { name: "Compras Imp", icon: "🛍️", color: "text-[#397dc1]", borderColor: "border-[#397dc1]/30", bg: "bg-[#397dc1]/10", angle: "-rotate-[60deg]", delay: "2s" },
-    ];
+    const [step, setStep] = useState(1); // 1: Flow, 2: Clusters, 3: Anomaly, 4: Alert
+
+    useEffect(() => {
+        const cycle = () => {
+            setStep(1);
+            const t1 = setTimeout(() => setStep(2), 1500);
+            const t2 = setTimeout(() => setStep(3), 3000);
+            const t3 = setTimeout(() => setStep(4), 4500);
+            const t4 = setTimeout(cycle, 8000); // 6s animation + 2s rest
+            return () => {
+                clearTimeout(t1);
+                clearTimeout(t2);
+                clearTimeout(t3);
+                clearTimeout(t4);
+            };
+        };
+        return cycle();
+    }, []);
 
     return (
-        <section className="relative py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 mt-12 overflow-hidden">
-            <div className="text-center mb-20 max-w-3xl mx-auto">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight leading-tight">
-                    <span className="text-white">La mayoría de la gente no sabe en qué se le va la </span>
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-lukas-alert to-orange-400">
-                        plata.
-                    </span>
+        <section className="relative py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 mt-12 overflow-hidden bg-[#020617]">
+            
+            {/* Animated Network Background (Internal to section) */}
+            <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
+                <div className="absolute top-0 left-0 w-full h-full" 
+                    style={{ 
+                        backgroundImage: 'radial-gradient(circle, rgba(57, 125, 193, 0.1) 1px, transparent 1px)', 
+                        backgroundSize: '80px 80px' 
+                    }} 
+                />
+            </div>
+
+            <div className="relative z-10 text-center mb-16 max-w-4xl mx-auto">
+                <h2 className="text-4xl md:text-5xl lg:text-7xl font-black mb-6 tracking-tight leading-tight text-white">
+                    La mayoría de la gente no sabe en qué se le va la {" "}
+                    <span className="text-[#f36e53]">plata.</span>
                 </h2>
-                <p className="text-white/70 text-lg md:text-xl leading-relaxed">
+                <p className="text-white/70 text-lg md:text-2xl font-medium max-w-[720px] mx-auto leading-relaxed">
                     Pequeños gastos que parecen inofensivos terminan destruyendo tu presupuesto mensual.
                 </p>
             </div>
 
-            {/* Visual Metaphor: The Leaking Wallet */}
-            <div className="relative max-w-5xl mx-auto h-[400px] md:h-[500px] flex flex-col items-center justify-start mt-10">
-
-                {/* The Wallet Source */}
-                <div className="relative z-20 w-32 h-32 md:w-40 md:h-40 bg-black/50 border-2 border-white/10 rounded-3xl backdrop-blur-xl shadow-[0_0_50px_rgba(255,255,255,0.05)] flex items-center justify-center animate-[float_4s_ease-in-out_infinite]">
-                    <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent rounded-3xl pointer-events-none" />
-                    <span className="text-6xl md:text-7xl drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">👛</span>
-
-                    {/* Subtle glow behind wallet */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-white/5 rounded-full blur-[30px] -z-10" />
-                </div>
-
-                {/* Lukas AI Floating Warning near wallet */}
-                <div className="absolute top-[30px] md:top-[60px] ml-[200px] md:ml-[340px] z-30 pointer-events-none">
-                    <div className="bg-black/80 border border-[#f36e53]/50 backdrop-blur-xl rounded-xl p-3 shadow-2xl animate-[float_6s_ease-in-out_infinite_0.5s]">
-                        <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-[#f36e53]/20 flex items-center justify-center text-[#f36e53] flex-shrink-0">
-                                ⚠️
-                            </div>
-                            <div>
-                                <p className="text-white text-[10px] uppercase font-bold tracking-wider opacity-70">Lukas AI</p>
-                                <p className="text-[#f36e53] text-sm font-bold leading-tight">Ojo… este mes estás gastando<br />más de lo normal.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* The Leaking SVG Particles & Paths */}
-                <div className="absolute top-[80px] md:top-[120px] left-0 right-0 bottom-0 z-10 pointer-events-none overflow-visible">
+            {/* Main Visual Area: Horizontal Flow */}
+            <div className="relative z-10 w-full max-w-5xl mx-auto h-[400px] bg-black/40 border border-white/5 rounded-[32px] overflow-hidden backdrop-blur-xl shadow-2xl">
+                
+                {/* Horizontal Flow Concept: INGRESOS -> GASTOS -> DETECCIÓN */}
+                <div className="absolute inset-0 flex items-center justify-between px-20">
                     
-                    {/* CSS-based particle system for animated coins dropping */}
-                    <div className="relative w-full h-full">
-                        {leaks.map((leak, idx) => (
-                            <React.Fragment key={idx}>
-                                <div className={`absolute top-0 left-1/2 origin-top ${leak.angle} -translate-x-1/2`}>
-                                    {/* Path Line */}
-                                    <div className="w-0.5 h-[180px] md:h-[260px] bg-gradient-to-b from-white/20 to-transparent" />
-                                    
-                                    {/* Animated Coin Drop */}
-                                    <div 
-                                        className={`absolute top-0 -left-1.5 md:-left-2 w-3 h-3 md:w-4 md:h-4 rounded-full bg-[#d8a93f] border border-[#f36e53] shadow-[0_0_15px_rgba(216,169,63,0.8)] z-10`}
-                                        style={{
-                                            animation: `leak-drop 2.5s ease-in infinite ${leak.delay}`
-                                        }}
-                                    >
-                                        <div className="w-full h-full border border-yellow-700/30 rounded-full" />
+                    {/* Left: INGRESOS Node */}
+                    <div className="flex flex-col items-center gap-4">
+                        <motion.div 
+                            className="w-24 h-24 rounded-full bg-[#1e1b4b] border border-[#397dc1]/30 flex items-center justify-center relative shadow-[0_0_30px_rgba(57,125,193,0.2)]"
+                            animate={{ scale: [1, 1.05, 1] }}
+                            transition={{ duration: 4, repeat: Infinity }}
+                        >
+                            <span className="text-white font-black text-xs uppercase tracking-[0.2em]">Ingresos</span>
+                            <div className="absolute inset-0 bg-[#397dc1]/10 rounded-full animate-ping" />
+                        </motion.div>
+                    </div>
+
+                    {/* Center: GASTOS Analysis Area */}
+                    <div className="flex-1 h-full relative mx-12">
+                        <svg className="w-full h-full" viewBox="0 0 400 300">
+                            {/* Connection Paths */}
+                            {CLUSTERS.map((cl, i) => (
+                                <path 
+                                    key={cl.id}
+                                    d={`M 0 150 C 100 150, 150 ${60 + i * 60}, 400 ${60 + i * 60}`}
+                                    fill="none"
+                                    stroke={cl.isAnomaly && step >= 3 ? "#f36e53" : "#397dc1"}
+                                    strokeWidth="1"
+                                    strokeOpacity={cl.isAnomaly && step >= 3 ? "0.3" : "0.1"}
+                                />
+                            ))}
+
+                            {/* Flowing Particles */}
+                            <AnimatePresence>
+                                {step >= 1 && (
+                                    <g>
+                                        {Array.from({ length: 12 }).map((_, i) => (
+                                            <motion.circle
+                                                key={i}
+                                                r="1.5"
+                                                fill={i % CLUSTERS.length === 1 && step >= 3 ? "#f36e53" : "#06b6d4"}
+                                                initial={{ offsetDistance: "0%", opacity: 0 }}
+                                                animate={{ offsetDistance: "100%", opacity: [0, 1, 0] }}
+                                                transition={{ 
+                                                    duration: i % CLUSTERS.length === 1 && step === 3 ? 1 : 2.5, 
+                                                    repeat: Infinity, 
+                                                    delay: i * 0.5,
+                                                    ease: "linear"
+                                                }}
+                                                style={{ 
+                                                    offsetPath: `path('M 0 150 C 100 150, 150 ${60 + (i % CLUSTERS.length) * 60}, 400 ${60 + (i % CLUSTERS.length) * 60}')`
+                                                }}
+                                            />
+                                        ))}
+                                    </g>
+                                )}
+                            </AnimatePresence>
+                        </svg>
+
+                        {/* Clusters (Nodes on the right side of the analysis area) */}
+                        <div className="absolute top-0 right-0 h-full flex flex-col justify-around py-10 translate-x-1/2">
+                            {CLUSTERS.map((cl) => (
+                                <motion.div 
+                                    key={cl.id}
+                                    initial={{ scale: 0, opacity: 0 }}
+                                    animate={{ 
+                                        scale: step >= 2 ? (cl.isAnomaly && step >= 3 ? 1.3 : 1) : 0,
+                                        opacity: step >= 2 ? 1 : 0
+                                    }}
+                                    className={`w-14 h-14 rounded-2xl bg-[#0f172a] border ${cl.isAnomaly && step >= 3 ? 'border-[#f36e53] shadow-[0_0_20px_#f36e5366]' : 'border-white/10'} flex items-center justify-center relative transition-colors duration-500`}
+                                >
+                                    <span className="text-2xl">{cl.icon}</span>
+                                    <span className="absolute -bottom-6 text-[10px] font-bold text-white/40 uppercase whitespace-nowrap">{cl.label}</span>
+                                    {cl.isAnomaly && step === 3 && (
+                                        <div className="absolute inset-0 bg-[#f36e53]/20 rounded-2xl animate-pulse" />
+                                    )}
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Right: DETECCIÓN (Lukas Alert) */}
+                    <div className="w-64 h-full flex items-center justify-center">
+                        <AnimatePresence>
+                            {step === 4 && (
+                                <motion.div 
+                                    initial={{ x: 50, opacity: 0, scale: 0.9 }}
+                                    animate={{ x: 0, opacity: 1, scale: 1 }}
+                                    exit={{ x: 20, opacity: 0 }}
+                                    className="bg-black/80 border border-[#f36e53] backdrop-blur-2xl rounded-2xl p-4 shadow-[0_0_40px_rgba(243,110,83,0.3)] relative"
+                                >
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-10 h-10 rounded-full bg-[#f36e53]/20 flex items-center justify-center text-[#f36e53] flex-shrink-0 animate-bounce">
+                                            ⚠️
+                                        </div>
+                                        <div>
+                                            <p className="text-white text-[10px] uppercase font-black tracking-widest opacity-50 mb-1">Lukas AI Alert</p>
+                                            <p className="text-white text-sm font-bold leading-snug">
+                                                Ojo… este mes estás gastando más de lo normal en <span className="text-[#f36e53]">Domicilios</span>.
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
-                            </React.Fragment>
-                        ))}
+                                    {/* Subtle vibration effect via motion */}
+                                    <motion.div 
+                                        className="absolute -inset-1 bg-[#f36e53]/10 -z-10 rounded-2xl"
+                                        animate={{ scale: [1, 1.02, 1] }}
+                                        transition={{ duration: 0.2, repeat: Infinity }}
+                                    />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
                 </div>
 
-                {/* The Expense Categories (The sinks) */}
-                <div className="absolute bottom-10 left-0 right-0 w-full flex justify-between items-end px-2 md:px-0 z-20">
-                    {leaks.map((leak, idx) => (
-                        <div key={idx} className="flex flex-col items-center gap-3 w-1/5">
-                            <div className={`w-14 h-14 md:w-20 md:h-20 rounded-2xl ${leak.bg} border ${leak.borderColor} backdrop-blur-md flex items-center justify-center text-2xl md:text-4xl shadow-lg transition-all hover:scale-110 hover:shadow-[0_0_30px_rgba(243,110,83,0.3)] spotlight-card animate-pulse`}>
-                                <span className="drop-shadow-lg">{leak.icon}</span>
-                            </div>
-                            <span className={`text-[10px] md:text-sm font-semibold tracking-wide ${leak.color} text-center`}>
-                                {leak.name}
-                            </span>
-                        </div>
+                {/* Vertical Step Indicators */}
+                <div className="absolute right-6 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-30">
+                    {[1, 2, 3, 4].map(s => (
+                        <div 
+                            key={s} 
+                            className={`w-1 h-8 rounded-full transition-all duration-500 ${step === s ? (s === 3 ? 'bg-[#f36e53] h-12' : 'bg-[#397dc1] h-12') : 'bg-white/10'}`} 
+                        />
                     ))}
                 </div>
             </div>
+
+            {/* Bottom Caption */}
+            <p className="text-center mt-12 text-[10px] font-mono font-black text-white/20 tracking-[0.6em] uppercase">
+                Lukas AI: Detectando fugas financieras en tiempo real
+            </p>
         </section>
     );
 }
