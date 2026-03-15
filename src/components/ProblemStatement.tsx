@@ -80,7 +80,7 @@ export default function ProblemStatement() {
                 <div className="absolute bottom-10 left-0 right-0 w-full flex justify-between items-end px-2 md:px-0 z-20">
                     {leaks.map((leak, idx) => (
                         <div key={idx} className="flex flex-col items-center gap-3 w-1/5">
-                            <div className={`w-14 h-14 md:w-20 md:h-20 rounded-2xl ${leak.bg} border ${leak.borderColor} backdrop-blur-md flex items-center justify-center text-2xl md:text-4xl shadow-lg transition-transform hover:scale-110 animate-pulse`}>
+                            <div className={`w-14 h-14 md:w-20 md:h-20 rounded-2xl ${leak.bg} border ${leak.borderColor} backdrop-blur-md flex items-center justify-center text-2xl md:text-4xl shadow-lg transition-all hover:scale-110 hover:shadow-[0_0_30px_rgba(243,110,83,0.3)] spotlight-card animate-pulse`}>
                                 <span className="drop-shadow-lg">{leak.icon}</span>
                             </div>
                             <span className={`text-[10px] md:text-sm font-semibold tracking-wide ${leak.color} text-center`}>
