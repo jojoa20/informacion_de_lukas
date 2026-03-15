@@ -1,4 +1,5 @@
 import React from 'react';
+import InteractiveHeroDemo from './InteractiveHeroDemo';
 
 export default function Hero() {
     return (
@@ -94,42 +95,8 @@ export default function Hero() {
                         </span>
                     </div>
 
-                    {/* App UI Body - FinScore & LeakBuster */}
-                    <div className="flex-1 p-5 flex flex-col items-center gap-4 relative">
-                        
-                        {/* FinScore Mini Widget */}
-                        <div className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center">
-                            <h3 className="text-white/50 text-[10px] font-bold uppercase tracking-widest mb-2">FinScore Actual</h3>
-                            <div className="relative w-24 h-12 overflow-hidden flex justify-center mt-2">
-                                <div className="absolute top-0 w-24 h-24 rounded-full border-4 border-white/10 border-t-[#d8a93f] border-r-[#d8a93f] transform -rotate-45" />
-                                <div className="absolute bottom-0 text-2xl font-black text-white drop-shadow-lg">740</div>
-                            </div>
-                            <span className="text-[#d8a93f] text-[10px] font-bold mt-2 bg-[#d8a93f]/10 px-2 py-1 rounded">Nivel Rey</span>
-                        </div>
-
-                        {/* Leak Buster Mini Widget */}
-                        <div className="w-full flex-1 bg-white/5 border border-white/10 rounded-2xl p-4 flex flex-col items-center relative overflow-hidden">
-                            <h3 className="text-white/50 text-[10px] font-bold uppercase tracking-widest mb-2">Leak Buster</h3>
-                            <div className="relative w-full h-full flex items-center justify-center">
-                                {/* Nodes */}
-                                <div className="absolute w-4 h-4 bg-[#a898c9] rounded-full shadow-[0_0_15px_rgba(168,152,201,0.5)] z-10" />
-                                <div className="absolute top-[20%] left-[20%] w-2 h-2 bg-[#d8a93f] rounded-full" />
-                                <div className="absolute top-[30%] right-[15%] w-5 h-5 bg-[#f36e53] rounded-full animate-pulse shadow-[0_0_20px_rgba(243,110,83,0.5)] z-10" />
-                                <div className="absolute bottom-[20%] left-[30%] w-3 h-3 bg-[#397dc1] rounded-full shadow-[0_0_10px_rgba(57,125,193,0.5)]" />
-                                
-                                {/* Lines */}
-                                <svg className="absolute inset-0 w-full h-full opacity-40">
-                                    <line x1="50%" y1="50%" x2="25%" y2="25%" stroke="#d8a93f" strokeWidth="1" />
-                                    <line x1="50%" y1="50%" x2="80%" y2="35%" stroke="#f36e53" strokeWidth="2" strokeDasharray="2 2" className="animate-[spin_3s_linear_infinite]" />
-                                    <line x1="50%" y1="50%" x2="35%" y2="75%" stroke="#397dc1" strokeWidth="1" />
-                                </svg>
-                            </div>
-                            <div className="absolute bottom-3 text-[10px] text-[#f36e53] font-bold bg-[#f36e53]/10 px-2 py-1 rounded-full border border-[#f36e53]/20">
-                                1 Fuga Detectada
-                            </div>
-                        </div>
-
-                    </div>
+                    {/* App UI Body - Interactive Demo */}
+                    <InteractiveHeroDemo />
                 </div>
 
                 {/* Floating UI Element 1: Gasto Detectado */}
