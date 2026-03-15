@@ -14,10 +14,12 @@ import Gamification from "@/components/Gamification";
 import Comparison from "@/components/Comparison";
 import FinancialProjection from "@/components/FinancialProjection";
 import CTA from "@/components/CTA";
+import BackgroundNetwork from "@/components/BackgroundNetwork";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-transparent text-white selection:bg-lukas-primary selection:text-white pb-20 overflow-hidden">
+      <BackgroundNetwork />
       <Hero />
       <ProblemStatement />
       <InputMethods />
