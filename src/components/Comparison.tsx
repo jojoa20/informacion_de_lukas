@@ -2,6 +2,12 @@
 
 import React from 'react';
 
+const TRADITIONAL_ITEMS = [
+    "Manual expense tracking",
+    "Forms and spreadsheets",
+    "No intelligence"
+];
+
 export default function Comparison() {
     return (
         <section className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 bg-[#0f172a] overflow-hidden">
