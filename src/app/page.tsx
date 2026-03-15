@@ -10,6 +10,7 @@ import ProductDemo from "@/components/ProductDemo";
 import LeakDetection from "@/components/LeakDetection";
 import FinScore from "@/components/FinScore";
 import AIPersonality from "@/components/AIPersonality";
+import OCRSection from "@/components/OCRSection";
 import Features from "@/components/Features";
 import WeeklyHeatmap from "@/components/WeeklyHeatmap";
 import InteractiveDemo from "@/components/InteractiveDemo";
@@ -48,6 +49,7 @@ export default function Home() {
       <ProductDemo />
       <LeakDetection />
       <FinScore />
+      <OCRSection />
       <AIPersonality />
       <Features />
       <WeeklyHeatmap />
