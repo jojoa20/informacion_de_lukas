@@ -1,208 +1,205 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 
 const CATEGORIES = [
-    { id: 'cafes', label: 'Cafés', color: '#397dc1' },
+    { id: 'cafes', label: 'Cafés', color: '#a898c9' },
     { id: 'streaming', label: 'Streaming', color: '#a898c9' },
     { id: 'domicilios', label: 'Domicilios', color: '#f36e53' }, // The Leak
     { id: 'transporte', label: 'Transporte', color: '#397dc1' },
-    { id: 'compras', label: 'Compras impulsivas', color: '#a898c9' },
-    { id: 'suscripciones', label: 'Suscripciones', color: '#d8a93f' }
+    { id: 'compras', label: 'Compras impulsivas', color: '#d8a93f' },
+    { id: 'suscripciones', label: 'Suscripciones', color: '#397dc1' }
 ];
 
 export default function LeakBuster() {
-    const [phase, setPhase] = useState(1); // 1: Flow, 2: Detection, 3: Analysis
-    const [mounted, setMounted] = useState(false);
+    const containerRef = useRef(null);
+    const isInView = useInView(containerRef, { once: true, amount: 0.3 });
+    const [phase, setPhase] = useState(0); // 0: Idle, 1: Flow, 2: Detection, 3: Analysis/Final
 
     useEffect(() => {
-        setMounted(true);
-        
-        let phaseTimer: NodeJS.Timeout;
-        
-        const startSequence = () => {
+        if (isInView && phase === 0) {
             setPhase(1);
             
-            phaseTimer = setTimeout(() => {
+            const p1Timer = setTimeout(() => {
                 setPhase(2);
-                phaseTimer = setTimeout(() => {
+                const p2Timer = setTimeout(() => {
                     setPhase(3);
-                    phaseTimer = setTimeout(() => {
-                        startSequence(); // Loop
-                    }, 4000);
-                }, 3000);
-            }, 4000);
+                }, 2000);
+                return () => clearTimeout(p2Timer);
+            }, 3000);
+            
+            return () => clearTimeout(p1Timer);
+        }
+    }, [isInView, phase]);
+
+    // Positions for categories in a clean circular layout
+    const radius = 220;
+    const centerX = 450;
+    const centerY = 350;
+
+    const categoryPositions = CATEGORIES.map((cat, i) => {
+        const angle = (i * (360 / CATEGORIES.length) - 90) * (Math.PI / 180);
+        return {
+            ...cat,
+            x: centerX + Math.cos(angle) * (radius * (cat.id === 'domicilios' && phase >= 2 ? 1.1 : 1)),
+            y: centerY + Math.sin(angle) * (radius * (cat.id === 'domicilios' && phase >= 2 ? 1.1 : 1))
         };
-
-        startSequence();
-
-        return () => clearTimeout(phaseTimer);
-    }, []);
-
-    // Radial layout for categories
-    const categoryPositions = useMemo(() => {
-        const radius = 220;
-        return CATEGORIES.map((cat, i) => {
-            const angle = (i * (360 / CATEGORIES.length) - 90) * (Math.PI / 180);
-            return {
-                ...cat,
-                x: 400 + Math.cos(angle) * radius,
-                y: 350 + Math.sin(angle) * radius
-            };
-        });
-    }, []);
-
-    if (!mounted) return null;
+    });
 
     return (
-        <section className="relative py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 bg-transparent overflow-hidden">
+        <section className="relative py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden">
             
-            {/* Background Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[700px] bg-[#397dc1]/5 blur-[200px] rounded-[100%] pointer-events-none -z-10" />
-
             <div className="text-center mb-16 max-w-4xl mx-auto h-32">
-                <span className="text-xs uppercase tracking-[0.4em] font-black text-[#397dc1] mb-6 block drop-shadow-sm">LUKAS LEAK BUSTER 3.0</span>
-                <AnimatePresence mode="wait">
-                    <motion.div
-                        key={phase}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        <h2 className="text-4xl md:text-6xl font-black mb-4 tracking-tighter text-white">
-                            {phase === 1 && "Visualizando Flujo de Efectivo"}
-                            {phase === 2 && <span className="text-[#f36e53]">Cluster Detectado: Gasto Hormiga</span>}
-                            {phase === 3 && <span className="text-[#397dc1]">Lukas: Fuga Analizada y Estabilizada</span>}
-                        </h2>
-                        <p className="text-white/60 text-lg md:text-xl font-medium">
-                            {phase === 1 && "Lukas mapea cada transacción desde tus ingresos a las categorías de gasto."}
-                            {phase === 2 && "Un patrón inusual ha sido detectado en el clúster de 'Domicilios'."}
-                            {phase === 3 && "Optimizando clústers para maximizar tu FinScore."}
-                        </p>
-                    </motion.div>
-                </AnimatePresence>
+                <h2 className="text-5xl font-black mb-4 tracking-tighter text-white">
+                    Lukas Leak Buster
+                </h2>
+                <p className="text-white/60 text-lg md:text-xl font-medium max-w-[640px] mx-auto">
+                    Lukas analiza automáticamente tus patrones de gasto y encuentra fugas de dinero.
+                </p>
             </div>
 
-            <div className="relative w-full max-w-5xl mx-auto aspect-[16/10] sm:aspect-[4/3] md:aspect-video rounded-[3rem] border border-white/10 bg-black/40 backdrop-blur-3xl overflow-hidden shadow-[0_0_100px_rgba(33,66,141,0.2)]">
-                {/* Visual Grid */}
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+            {/* Cinematic Container */}
+            <div 
+                ref={containerRef}
+                className="relative w-full max-w-5xl mx-auto rounded-[24px] p-10 bg-gradient-to-b from-[#1e1b4b] to-[#0f172a] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden"
+                style={{ 
+                    backgroundImage: 'radial-gradient(circle at center, #21428d 0%, #120c2c 100%)',
+                    boxShadow: 'inset 0 0 100px rgba(57, 125, 193, 0.1), 0 20px 50px rgba(0,0,0,0.5)'
+                }}
+            >
+                {/* Status Messages */}
+                <div className="absolute top-10 left-10 z-20">
+                    <AnimatePresence mode="wait">
+                        {phase === 3 && (
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                className="flex flex-col gap-1"
+                            >
+                                <span className="text-[#397dc1] font-mono text-xs font-black tracking-[0.2em] uppercase">Lukas está analizando tus patrones de gasto...</span>
+                                <div className="flex gap-4 items-center">
+                                    <span className="px-3 py-1 bg-[#f36e53]/20 border border-[#f36e53]/40 rounded text-[#f36e53] text-[10px] font-black uppercase tracking-widest">Fuga detectada</span>
+                                    <span className="text-white font-black text-sm">Ahorro potencial identificado</span>
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
 
-                <svg className="w-full h-full" viewBox="0 0 800 650">
+                <svg className="w-full h-full" viewBox="0 0 900 700">
                     <defs>
-                        <filter id="glow-node">
+                        <filter id="node-glow">
                             <feGaussianBlur stdDeviation="3" result="blur" />
                             <feComposite in="SourceGraphic" in2="blur" operator="over" />
                         </filter>
-                        <filter id="glow-leak">
-                            <feGaussianBlur stdDeviation="8" result="blur" />
+                        <filter id="leak-pulse-glow">
+                            <feGaussianBlur stdDeviation="10" result="blur" />
                             <feComposite in="SourceGraphic" in2="blur" operator="over" />
                         </filter>
                     </defs>
 
                     {/* Central Node: INGRESOS */}
-                    <g transform="translate(400, 350)">
+                    <g transform={`translate(${centerX}, ${centerY})`}>
                         <motion.circle
-                            r={60}
+                            r={65}
                             fill="#1e1b4b"
-                            stroke="#a898c9"
-                            strokeWidth="2"
+                            stroke="#397dc1"
+                            strokeWidth="1.5"
                             initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
+                            animate={{ scale: phase >= 1 ? 1 : 0 }}
                             transition={{ duration: 1, type: "spring" }}
                         />
-                        <text textAnchor="middle" dy="5" className="fill-white font-black text-xs tracking-widest pointer-events-none">INGRESOS</text>
-                        <text textAnchor="middle" dy="25" className="fill-white/40 font-bold text-[8px] tracking-tighter">$4.500.000</text>
+                        <text textAnchor="middle" dy="5" className="fill-white font-black text-[11px] tracking-[0.2em] pointer-events-none uppercase">Ingresos</text>
                     </g>
 
-                    {/* Category Nodes and Particles */}
+                    {/* Category Connections and Particles */}
                     {categoryPositions.map((cat) => {
                         const isLeak = cat.id === 'domicilios';
                         const isDimmed = phase === 2 && !isLeak;
-                        
+
                         return (
                             <g key={cat.id}>
                                 {/* Connection Line */}
                                 <motion.line
-                                    x1="400" y1="350"
+                                    x1={centerX} y1={centerY}
                                     x2={cat.x} y2={cat.y}
                                     stroke={cat.color}
                                     strokeWidth="1"
-                                    strokeOpacity={isDimmed ? 0.05 : 0.2}
-                                    initial={{ pathLength: 0 }}
-                                    animate={{ pathLength: 1 }}
-                                    transition={{ duration: 1.5, delay: 0.5 }}
+                                    initial={{ pathLength: 0, opacity: 0 }}
+                                    animate={{ 
+                                        pathLength: phase >= 1 ? 1 : 0,
+                                        opacity: phase >= 1 ? (isDimmed ? 0.05 : 0.15) : 0
+                                    }}
+                                    transition={{ duration: 1.5, delay: 0.2 }}
                                 />
 
-                                {/* Category Particles */}
-                                {phase <= 2 && !isDimmed && (
+                                {/* Flowing Particles */}
+                                {phase >= 1 && phase < 3 && !isDimmed && (
                                     <g>
-                                        {[0, 1, 2, 3, 4].map((i) => (
+                                        {[0, 1, 2, 3].map((i) => (
                                             <motion.circle
                                                 key={i}
                                                 r="2"
                                                 fill={cat.color}
-                                                filter="url(#glow-node)"
-                                                initial={{ offsetDistance: "0%" }}
+                                                filter="url(#node-glow)"
+                                                initial={{ offsetDistance: "0%", opacity: 0 }}
                                                 animate={{ 
                                                     offsetDistance: "100%",
                                                     opacity: [0, 1, 0]
                                                 }}
                                                 transition={{ 
-                                                    duration: isLeak && phase === 2 ? 1.5 : 2.5, 
+                                                    duration: isLeak && phase === 2 ? 1.2 : 3, 
                                                     repeat: Infinity, 
-                                                    delay: i * 0.5,
+                                                    delay: i * 0.8,
                                                     ease: "linear"
                                                 }}
                                                 style={{ 
-                                                    offsetPath: `path('M 400 350 L ${cat.x} ${cat.y}')`,
-                                                    position: 'absolute'
+                                                    offsetPath: `path('M ${centerX} ${centerY} L ${cat.x} ${cat.y}')`,
                                                 }}
                                             />
                                         ))}
                                     </g>
                                 )}
 
-                                {/* Node */}
+                                {/* Category Node */}
                                 <motion.g
-                                    initial={{ scale: 0 }}
+                                    initial={{ scale: 0, opacity: 0 }}
                                     animate={{ 
-                                        scale: isLeak && phase === 2 ? 1.4 : 1,
-                                        opacity: isDimmed ? 0.2 : 1
+                                        scale: phase >= 1 ? (isLeak && phase === 2 ? 1.3 : 1) : 0,
+                                        opacity: phase >= 1 ? (isDimmed ? 0.2 : 1) : 0
                                     }}
                                     transition={{ duration: 0.8, type: "spring" }}
                                 >
                                     <circle
-                                        cx={cat.x} cy={cat.y} r={isLeak && phase === 2 ? 45 : 35}
+                                        cx={cat.x} cy={cat.y} r={isLeak && phase === 2 ? 40 : 35}
                                         fill="#0f172a"
                                         stroke={isLeak && phase >= 2 ? '#f36e53' : cat.color}
-                                        strokeWidth="2"
+                                        strokeWidth="1.5"
                                         className={isLeak && phase === 2 ? "animate-pulse" : ""}
-                                        style={{ filter: isLeak && phase === 2 ? "url(#glow-leak)" : "none" }}
+                                        style={{ filter: isLeak && phase === 2 ? "url(#leak-pulse-glow)" : "url(#node-glow)" }}
                                     />
                                     <text
                                         x={cat.x} y={cat.y}
                                         textAnchor="middle" dy="5"
-                                        className="fill-white font-black text-[10px] tracking-tight pointer-events-none"
+                                        className="fill-white font-bold text-[9px] tracking-tight pointer-events-none uppercase"
                                     >
                                         {cat.label}
                                     </text>
-                                    
-                                    {isLeak && phase >= 2 && (
-                                        <motion.text
-                                            x={cat.x} y={cat.y + 15}
-                                            textAnchor="middle"
-                                            className="fill-[#f36e53] font-bold text-[8px] pointer-events-none"
-                                            initial={{ opacity: 0 }}
-                                            animate={{ opacity: 1 }}
+
+                                    {/* Alert Label in Phase 2 */}
+                                    {isLeak && phase === 2 && (
+                                        <motion.g
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
                                         >
-                                            $150.000 (30 tx)
-                                        </motion.text>
+                                            <text x={cat.x} y={cat.y - 50} textAnchor="middle" className="fill-[#f36e53] font-black text-[10px] tracking-widest uppercase">Cluster detectado</text>
+                                            <text x={cat.x} y={cat.y - 35} textAnchor="middle" className="fill-white/70 font-bold text-[9px] uppercase">$150.000 en 30 transacciones</text>
+                                        </motion.g>
                                     )}
                                 </motion.g>
 
-                                {/* Lukas Analysis UI Overlay */}
+                                {/* Lukas Analysis Scanning Ring in Phase 3 */}
                                 {isLeak && phase === 3 && (
                                     <g>
                                         <motion.circle
@@ -210,73 +207,42 @@ export default function LeakBuster() {
                                             fill="none"
                                             stroke="#397dc1"
                                             strokeWidth="1"
-                                            strokeDasharray="5 5"
-                                            className="animate-[spin_4s_linear_infinite]"
+                                            strokeDasharray="4 4"
+                                            animate={{ rotate: 360 }}
+                                            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
                                         />
                                         <motion.circle
                                             cx={cat.x} cy={cat.y}
-                                            initial={{ r: 0, opacity: 0 }}
-                                            animate={{ r: [0, 80, 100], opacity: [0, 0.5, 0] }}
+                                            initial={{ r: 35, opacity: 0 }}
+                                            animate={{ r: [35, 80], opacity: [0.5, 0] }}
                                             transition={{ duration: 2, repeat: Infinity }}
                                             fill="none"
-                                            stroke="#06b6d4"
+                                            stroke="#397dc1"
                                             strokeWidth="2"
                                         />
-                                        <rect x={cat.x - 60} y={cat.y - 70} width="120" height="20" rx="10" className="fill-[#397dc1] shadow-xl" />
-                                        <text x={cat.x} y={cat.y - 57} textAnchor="middle" className="fill-white font-black text-[8px] tracking-[0.2em] uppercase">Fuga Detectada</text>
                                     </g>
                                 )}
                             </g>
                         );
                     })}
 
-                    {/* Scanning Line Overlay during Analysis */}
+                    {/* Global Scanning Ring */}
                     {phase === 3 && (
-                        <motion.line
-                            x1="0" x2="800"
-                            initial={{ y: 0 }}
-                            animate={{ y: [0, 650, 0] }}
-                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                        <motion.circle
+                            cx={centerX} cy={centerY}
+                            initial={{ r: 0, opacity: 0 }}
+                            animate={{ r: [0, 500], opacity: [0.4, 0] }}
+                            transition={{ duration: 3, repeat: Infinity }}
+                            fill="none"
                             stroke="#06b6d4"
                             strokeWidth="1"
-                            strokeOpacity="0.4"
-                            className="shadow-[0_0_20px_#06b6d4]"
                         />
                     )}
                 </svg>
 
-                {/* Phase Status Pill */}
-                <div className="absolute top-8 left-1/2 -translate-x-1/2 flex gap-4">
-                    <div className={`px-4 py-1.5 rounded-full border transition-all duration-500 text-[10px] font-black tracking-widest uppercase ${phase === 1 ? 'bg-[#397dc1]/20 border-[#397dc1] text-white' : 'bg-white/5 border-white/10 text-white/30'}`}>
-                        Mapeo
-                    </div>
-                    <div className={`px-4 py-1.5 rounded-full border transition-all duration-500 text-[10px] font-black tracking-widest uppercase ${phase === 2 ? 'bg-[#f36e53]/20 border-[#f36e53] text-white shadow-[0_0_15px_rgba(243,110,83,0.3)]' : 'bg-white/5 border-white/10 text-white/30'}`}>
-                        Detección
-                    </div>
-                    <div className={`px-4 py-1.5 rounded-full border transition-all duration-500 text-[10px] font-black tracking-widest uppercase ${phase === 3 ? 'bg-[#397dc1]/20 border-[#397dc1] text-white shadow-[0_0_15px_rgba(57,125,193,0.3)]' : 'bg-white/5 border-white/10 text-white/30'}`}>
-                        Estabilización
-                    </div>
-                </div>
-
-                {/* Lukas Status Text Bottom Right */}
-                <div className="absolute bottom-8 right-8 text-right font-mono text-[10px] space-y-1">
-                    <p className="text-[#397dc1] opacity-70 tracking-widest font-black flex items-center justify-end gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#397dc1] animate-pulse" />
-                        LUKAS ENGINE V3.0
-                    </p>
-                    <AnimatePresence mode="wait">
-                        <motion.p
-                            key={phase}
-                            initial={{ opacity: 0, x: 10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -10 }}
-                            className="text-white/40 uppercase"
-                        >
-                            {phase === 1 && "Running money flux simulation..."}
-                            {phase === 2 && "ALERT: High density cluster detected in /FOOD"}
-                            {phase === 3 && "ANALYSIS COMPLETE: Savings optimized."}
-                        </motion.p>
-                    </AnimatePresence>
+                {/* Technical Caption */}
+                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[10px] font-mono font-black text-white/30 tracking-[0.3em] uppercase">
+                    Análisis financiero en tiempo real con Lukas AI
                 </div>
             </div>
         </section>
