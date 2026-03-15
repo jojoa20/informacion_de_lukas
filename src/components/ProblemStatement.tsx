@@ -140,28 +140,23 @@ export default function ProblemStatement() {
                         <AnimatePresence>
                             {step === 4 && (
                                 <motion.div 
-                                    initial={{ x: 50, opacity: 0, scale: 0.9 }}
-                                    animate={{ x: 0, opacity: 1, scale: 1 }}
-                                    exit={{ x: 20, opacity: 0 }}
-                                    className="bg-black/80 border border-[#f36e53] backdrop-blur-2xl rounded-2xl p-4 shadow-[0_0_40px_rgba(243,110,83,0.3)] relative"
+                                    initial={{ x: 10, opacity: 0 }}
+                                    animate={{ x: 0, opacity: 1 }}
+                                    exit={{ x: 10, opacity: 0 }}
+                                    transition={{ duration: 0.4 }}
+                                    className="bg-[#141419]/95 border border-[#f36e53] backdrop-blur-2xl rounded-2xl p-[18px] [padding-right:22px] shadow-[0_0_25px_rgba(243,110,83,0.18)] relative w-[280px] -translate-x-10"
                                 >
                                     <div className="flex items-start gap-4">
-                                        <div className="w-10 h-10 rounded-full bg-[#f36e53]/20 flex items-center justify-center text-[#f36e53] flex-shrink-0 animate-bounce">
+                                        <div className="w-10 h-10 rounded-full bg-[#f36e53]/20 flex items-center justify-center text-[#f36e53] flex-shrink-0">
                                             ⚠️
                                         </div>
                                         <div>
-                                            <p className="text-white text-[10px] uppercase font-black tracking-widest opacity-50 mb-1">Lukas AI Alert</p>
-                                            <p className="text-white text-sm font-bold leading-snug">
-                                                Ojo… este mes estás gastando más de lo normal en <span className="text-[#f36e53]">Domicilios</span>.
+                                            <p className="text-white text-[12px] uppercase font-black tracking-[2px] opacity-70 mb-1.5">Lukas AI Alert</p>
+                                            <p className="text-white text-[18px] font-semibold leading-[1.4]">
+                                                Ojo… este mes estás gastando más de lo normal en <span className="text-[#ff6b57]">Domicilios</span>.
                                             </p>
                                         </div>
                                     </div>
-                                    {/* Subtle vibration effect via motion */}
-                                    <motion.div 
-                                        className="absolute -inset-1 bg-[#f36e53]/10 -z-10 rounded-2xl"
-                                        animate={{ scale: [1, 1.02, 1] }}
-                                        transition={{ duration: 0.2, repeat: Infinity }}
-                                    />
                                 </motion.div>
                             )}
                         </AnimatePresence>
