@@ -7,6 +7,7 @@ import LeakDetection from "@/components/LeakDetection";
 import FinScore from "@/components/FinScore";
 import AIPersonality from "@/components/AIPersonality";
 import Features from "@/components/Features";
+import WeeklyHeatmap from "@/components/WeeklyHeatmap";
 import InteractiveDemo from "@/components/InteractiveDemo";
 import FinancialProjection from "@/components/FinancialProjection";
 import CTA from "@/components/CTA";
@@ -23,6 +24,7 @@ export default function Home() {
       <FinScore />
       <AIPersonality />
       <Features />
+      <WeeklyHeatmap />
       <InteractiveDemo />
       <FinancialProjection />
       <CTA />
