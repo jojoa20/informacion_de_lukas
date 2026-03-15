@@ -19,6 +19,7 @@ import Gamification from "@/components/Gamification";
 import Comparison from "@/components/Comparison";
 import FinancialProjection from "@/components/FinancialProjection";
 import CTA from "@/components/CTA";
+import BeforeAfter from "@/components/BeforeAfter";
 import BackgroundNetwork from "@/components/BackgroundNetwork";
 
 export default function Home() {
@@ -57,6 +58,7 @@ export default function Home() {
       <Storytelling />
       <Gamification />
       <Comparison />
+      <BeforeAfter />
       <FinancialProjection />
       <CTA />
     </main>
