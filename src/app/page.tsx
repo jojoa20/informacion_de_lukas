@@ -4,8 +4,8 @@ import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import ProblemStatement from "@/components/ProblemStatement";
+import InputMethods from "@/components/InputMethods";
 import LeakBuster from "@/components/LeakBuster";
-import ProductDemo from "@/components/ProductDemo";
 import LeakDetection from "@/components/LeakDetection";
 import FinScore from "@/components/FinScore";
 import AIPersonality from "@/components/AIPersonality";
@@ -45,7 +45,7 @@ export default function Home() {
       <Hero />
       <ProblemStatement />
       <LeakBuster />
-      <ProductDemo />
+      <InputMethods />
       <LeakDetection />
       <FinScore />
       <OCRSection />
