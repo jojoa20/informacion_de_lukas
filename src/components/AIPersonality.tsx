@@ -1,110 +1,163 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const MESSAGES = [
-    {
-        id: "good",
-        status: "Good score",
-        text: "¡Excelente, pana! Este mes vas volando.",
-        sub: "Sigue así y el FinScore llegará al máximo.",
-        icon: "🚀",
-        color: "#10b981", // Success Green
-        bg: "bg-[#10b981]/10",
-        border: "border-[#10b981]/20",
-        glow: "shadow-[0_0_30px_rgba(16,185,129,0.15)]"
-    },
-    {
-        id: "bad",
-        status: "Bad spending",
-        text: "Ojo… estás mecateando mucha plata en domicilios.",
-        sub: "Lukas detectó un aumento anormal en apps de comida.",
-        icon: "🍔",
-        color: "#f97316", // Warning Orange
-        bg: "bg-[#f97316]/10",
-        border: "border-[#f97316]/20",
-        glow: "shadow-[0_0_30px_rgba(249,115,22,0.15)]"
-    },
-    {
-        id: "critical",
-        status: "Critical",
-        text: "Este mes ya no puedes gastar más.",
-        sub: "Has alcanzado tu límite de seguridad financiera.",
-        icon: "🚨",
-        color: "#f36e53", // Alert Coral
-        bg: "bg-[#f36e53]/10",
-        border: "border-[#f36e53]/20",
-        glow: "shadow-[0_0_30px_rgba(243,110,83,0.15)]"
-    }
+const CHAT_SEQUENCE = [
+  { id: 1, type: 'user', text: 'Lukas, ¿cómo voy este mes?', delay: 1000 },
+  { id: 2, type: 'lukas', text: 'Parce… vas regular.', delay: 3000 },
+  { id: 3, type: 'lukas', text: 'Llevas $180.000 en domicilios esta semana.', delay: 5000 },
+  { id: 4, type: 'lukas', text: 'Si sigues así no llegas a fin de mes.', delay: 7000 },
+  { id: 5, type: 'lukas', text: 'Te recomiendo bajar domicilios 30%.', delay: 9000 },
 ];
 
 export default function AIPersonality() {
-    return (
-        <section className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 bg-[#0f172a] overflow-hidden">
-            
-            {/* Background Ambient Glow */}
-            <div className="absolute inset-0 pt-24 -z-10 pointer-events-none">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-gradient-to-tr from-[#397dc1]/5 via-[#a898c9]/5 to-[#f36e53]/5 blur-[150px] rounded-[100%]"></div>
-            </div>
+  const [visibleMessages, setVisibleMessages] = useState<number[]>([]);
+  const [isTyping, setIsTyping] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-            <div className="text-center mb-16 max-w-4xl mx-auto">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight text-white">
-                    Lukas habla <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#397dc1] to-[#a898c9]">como tu pana.</span>
-                </h2>
-                <p className="text-white/70 text-lg md:text-xl leading-relaxed">
-                    Olvídate de las notificaciones frías y bancarias. <br className="hidden md:block"/>
-                    Lukas te dice las cosas como son, con el tono de alguien que de verdad te cuida.
-                </p>
-            </div>
+  useEffect(() => {
+    const startSequence = () => {
+      setVisibleMessages([]);
+      setIsTyping(false);
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch max-w-6xl mx-auto relative z-10">
-                {MESSAGES.map((msg) => (
-                    <div 
-                        key={msg.id}
-                        className={`group relative ${msg.bg} border ${msg.border} rounded-3xl p-8 backdrop-blur-xl flex flex-col transition-all duration-500 hover:scale-[1.03] ${msg.glow}`}
-                    >
-                        {/* Status Label */}
-                        <div className="mb-6">
-                            <span 
-                                className="text-xs uppercase tracking-[0.2em] font-bold px-3 py-1 rounded-full border border-white/10 bg-white/5 bg-opacity-50"
-                                style={{ color: msg.color }}
-                            >
-                                {msg.status}
-                            </span>
-                        </div>
+      CHAT_SEQUENCE.forEach((msg, index) => {
+        setTimeout(() => {
+          if (msg.type === 'lukas') {
+            setIsTyping(true);
+            setTimeout(() => {
+              setIsTyping(false);
+              setVisibleMessages(prev => [...prev, msg.id]);
+            }, 1000);
+          } else {
+            setVisibleMessages(prev => [...prev, msg.id]);
+          }
+        }, msg.delay);
+      });
 
-                        {/* Chat Interface Simulation */}
-                        <div className="flex-1 flex flex-col space-y-4">
-                            <div className="flex items-start gap-4">
-                                <div 
-                                    className="w-10 h-10 shrink-0 rounded-xl flex items-center justify-center text-xl shadow-lg relative group-hover:rotate-6 transition-transform duration-300"
-                                    style={{ backgroundColor: msg.color }}
-                                >
-                                    <span className="relative z-10">🤖</span>
-                                    <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 rounded-xl transition-opacity"></div>
-                                </div>
-                                <div className="bg-white/5 border border-white/10 p-5 rounded-2xl rounded-tl-sm shadow-xl backdrop-blur-md">
-                                    <p className="text-white font-semibold text-lg leading-snug mb-2">
-                                        {msg.text}
-                                    </p>
-                                    <p className="text-white/40 text-xs font-medium">
-                                        {msg.sub}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+      // Restart loop after 12 seconds
+      setTimeout(startSequence, 12000);
+    };
 
-                        {/* Decorative Icon in the Corner */}
-                        <div className="absolute -bottom-2 -right-2 text-6xl opacity-10 grayscale group-hover:grayscale-0 group-hover:opacity-30 transition-all duration-700 pointer-events-none transform group-hover:-translate-y-2 group-hover:-translate-x-2">
-                            {msg.icon}
-                        </div>
+    startSequence();
+  }, []);
+
+  return (
+    <section className="relative py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 bg-[#020617] overflow-hidden">
+      
+      {/* Background Glow */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#397dc1]/10 blur-[120px] rounded-full" />
+      </div>
+
+      <div className="relative z-10 text-center mb-16">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight text-white">
+          Habla con Lukas como <span className="text-[#397dc1]">con un pana.</span>
+        </h2>
+        <p className="text-white/70 text-lg md:text-xl font-medium max-w-[640px] mx-auto">
+          Lukas analiza tus gastos y te dice la verdad, sin rodeos.
+        </p>
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        
+        {/* Chat Interface */}
+        <div className="bg-black/40 border border-white/5 rounded-[32px] p-6 md:p-10 backdrop-blur-xl shadow-2xl min-h-[500px] flex flex-col">
+          <div className="flex-1 space-y-4">
+            <AnimatePresence>
+              {CHAT_SEQUENCE.map((msg) => visibleMessages.includes(msg.id) && (
+                <motion.div
+                  key={msg.id}
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  <div className="flex items-end gap-3 max-w-[80%]">
+                    {msg.type === 'lukas' && (
+                      <div className="w-8 h-8 rounded-full bg-[#397dc1] flex items-center justify-center text-xs shadow-[0_0_15px_rgba(57,125,193,0.4)]">
+                        🤖
+                      </div>
+                    )}
+                    <div className={`p-4 rounded-2xl text-sm font-medium leading-relaxed shadow-lg ${
+                      msg.type === 'user' 
+                        ? 'bg-gradient-to-br from-[#397dc1] to-[#21428d] text-white rounded-br-none' 
+                        : 'bg-white/5 border border-white/10 text-white/90 rounded-bl-none'
+                    }`}>
+                      {msg.text}
                     </div>
-                ))}
-            </div>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
 
-            {/* Bottom highlight line */}
-            <div className="mt-20 w-32 h-1 bg-gradient-to-r from-transparent via-white/10 to-transparent mx-auto"></div>
-        </section>
-    );
+            {/* Typing Indicator */}
+            {isTyping && (
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="flex justify-start"
+              >
+                <div className="flex items-center gap-3 bg-white/5 border border-white/10 p-3 rounded-2xl rounded-bl-none">
+                  <div className="w-6 h-6 rounded-full bg-[#397dc1]/20 flex items-center justify-center text-[10px]">🤖</div>
+                  <div className="flex gap-1">
+                    <motion.div animate={{ opacity: [0.2, 1, 0.2] }} transition={{ repeat: Infinity, duration: 1 }} className="w-1.5 h-1.5 bg-white/40 rounded-full" />
+                    <motion.div animate={{ opacity: [0.2, 1, 0.2] }} transition={{ repeat: Infinity, duration: 1, delay: 0.2 }} className="w-1.5 h-1.5 bg-white/40 rounded-full" />
+                    <motion.div animate={{ opacity: [0.2, 1, 0.2] }} transition={{ repeat: Infinity, duration: 1, delay: 0.4 }} className="w-1.5 h-1.5 bg-white/40 rounded-full" />
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </div>
+        </div>
+
+        {/* Visual Data Companion */}
+        <div className="bg-black/40 border border-white/5 rounded-[32px] p-10 backdrop-blur-xl shadow-2xl relative overflow-hidden group">
+          <h4 className="text-white/40 text-xs font-black uppercase tracking-[0.3em] mb-10">Live Analytics Feed</h4>
+          
+          <div className="space-y-8">
+            {[
+              { label: 'Transporte', value: 45, color: '#397dc1' },
+              { label: 'Domicilios', value: 90, color: '#f36e53', highlight: true },
+              { label: 'Cafés', value: 30, color: '#a898c9' },
+              { label: 'Streaming', value: 20, color: '#397dc1' }
+            ].map((item, i) => (
+              <div key={i} className="space-y-2">
+                <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest">
+                  <span className={item.highlight ? 'text-[#f36e53]' : 'text-white/40'}>{item.label}</span>
+                  <span className="text-white/60">${item.label === 'Domicilios' ? '180k' : '45k'}</span>
+                </div>
+                <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${item.value}%` }}
+                    transition={{ duration: 1.5, delay: i * 0.2 }}
+                    className="h-full rounded-full relative"
+                    style={{ backgroundColor: item.color }}
+                  >
+                    {item.highlight && (
+                      <div className="absolute inset-0 bg-white/20 animate-pulse" />
+                    )}
+                  </motion.div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* AI Alert Decoration */}
+          <div className="mt-12 p-4 rounded-xl bg-[#f36e53]/10 border border-[#f36e53]/20 flex items-center justify-between">
+            <span className="text-[#f36e53] text-[10px] font-black uppercase tracking-widest animate-pulse">Pattern Identified</span>
+            <span className="text-white/60 text-[10px] font-medium">Critical Spend detected in Domicilios</span>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Footer Branding */}
+      <div className="mt-20 text-center">
+        <p className="text-[10px] font-mono font-black text-white/20 tracking-[0.5em] uppercase">
+          Lukas AI Personality Core v1.0
+        </p>
+      </div>
+    </section>
+  );
 }
-
