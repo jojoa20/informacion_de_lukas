@@ -112,7 +112,7 @@ export default function AIPersonality() {
 
         {/* Visual Data Companion */}
         <div className="bg-black/40 border border-white/5 rounded-[32px] p-10 backdrop-blur-xl shadow-2xl relative overflow-hidden group">
-          <h4 className="text-white/40 text-xs font-black uppercase tracking-[0.3em] mb-10">Live Analytics Feed</h4>
+          <h4 className="text-white/40 text-xs font-black uppercase tracking-[0.3em] mb-10">Análisis en tiempo real</h4>
           
           <div className="space-y-8">
             {[
@@ -145,8 +145,8 @@ export default function AIPersonality() {
 
           {/* AI Alert Decoration */}
           <div className="mt-12 p-4 rounded-xl bg-[#f36e53]/10 border border-[#f36e53]/20 flex items-center justify-between">
-            <span className="text-[#f36e53] text-[10px] font-black uppercase tracking-widest animate-pulse">Pattern Identified</span>
-            <span className="text-white/60 text-[10px] font-medium">Critical Spend detected in Domicilios</span>
+            <span className="text-[#f36e53] text-[10px] font-black uppercase tracking-widest animate-pulse">Patrón identificado</span>
+            <span className="text-white/60 text-[10px] font-medium">Gasto crítico detectado en Domicilios</span>
           </div>
         </div>
 

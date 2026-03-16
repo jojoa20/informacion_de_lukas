@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 export default function FinScore() {
     const [score, setScore] = useState(400);
@@ -11,7 +13,7 @@ export default function FinScore() {
     const getScoreData = (currentScore: number) => {
         if (currentScore < 500) {
             return {
-                tier: "Financial chaos",
+                tier: "Caos financiero",
                 color: "#f36e53", // Coral Red
                 glowClass: "shadow-[0_0_50px_rgba(243,110,83,0.4)]",
                 text: "Estás en modo supervivencia.",
@@ -19,7 +21,7 @@ export default function FinScore() {
             };
         } else if (currentScore < 700) {
             return {
-                tier: "Stabilizing",
+                tier: "Estabilizando",
                 color: "#d8a93f", // Gold
                 glowClass: "shadow-[0_0_50px_rgba(216,169,63,0.4)]",
                 text: "Vas por buen camino.",
@@ -27,7 +29,7 @@ export default function FinScore() {
             };
         } else if (currentScore < 850) {
             return {
-                tier: "Good control",
+                tier: "Buen control",
                 color: "#10b981", // Emerald Green
                 glowClass: "shadow-[0_0_50px_rgba(16,185,129,0.4)]",
                 text: "Dominando el control.",
@@ -35,7 +37,7 @@ export default function FinScore() {
             };
         } else {
             return {
-                tier: "Financial pro",
+                tier: "Pro financiero",
                 color: "#397dc1", // Cyan/Blue
                 glowClass: "shadow-[0_0_60px_rgba(57,125,193,0.6)]",
                 text: "Finanzas nivel leyenda.",
@@ -116,17 +118,30 @@ export default function FinScore() {
     return (
         <section className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 bg-[#0f172a]">
             
-            <div className="text-center mb-16 max-w-3xl mx-auto">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight">
-                    <span className="text-white">Tu salud financiera ahora tiene </span>
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d8a93f] to-[#f36e53]">
-                        puntaje.
-                    </span>
-                </h2>
-                <p className="text-white/70 text-lg md:text-xl leading-relaxed">
-                    Lukas evalúa cada movimiento y te asigna un FinScore dinámico de 0 a 1000. 
-                    Mejóralo optimizando tu gasto y desbloquea beneficios reales.
-                </p>
+            <div className="text-center mb-16 max-w-4xl mx-auto space-y-6">
+                <motion.h2 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white"
+                >
+                    FinScore
+                </motion.h2>
+                <motion.h3
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                    className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d8a93f] to-[#f36e53] tracking-tight"
+                >
+                    Tu salud financiera en un número.
+                </motion.h3>
+                <motion.p 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-white/70 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed"
+                >
+                    Un indicador simple que resume cómo van tus finanzas este mes.
+                </motion.p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -214,6 +229,24 @@ export default function FinScore() {
 
                 {/* Event Logs / UI Panel (Right Side) */}
                 <div className="order-2 w-full max-w-md mx-auto">
+                    {/* Lukas Inteligente Mascot */}
+                    <motion.div
+                        animate={{ y: [0, -8, 0] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                        className="flex justify-start mb-2 ml-4"
+                    >
+                        <div className="drop-shadow-[0_0_14px_rgba(57,125,193,0.5)]">
+                            <Image
+                                src="/mascots/lukas_inteligente.png"
+                                alt="Lukas inteligente"
+                                width={90}
+                                height={90}
+                                className="object-contain"
+                                style={{ maxHeight: 90 }}
+                                loading="lazy"
+                            />
+                        </div>
+                    </motion.div>
                     <div className="bg-[#1e1b4b]/30 border border-white/5 rounded-3xl p-8 backdrop-blur-xl shadow-2xl relative overflow-hidden">
                         
                         {/* Decorative Top Highlight */}

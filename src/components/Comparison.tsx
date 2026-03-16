@@ -3,9 +3,9 @@
 import React from 'react';
 
 const TRADITIONAL_ITEMS = [
-    "Manual expense tracking",
-    "Forms and spreadsheets",
-    "No intelligence"
+    "Registro de gastos manual",
+    "Formularios y hojas de cálculo",
+    "Sin inteligencia"
 ];
 
 export default function Comparison() {
@@ -20,7 +20,7 @@ export default function Comparison() {
 
             <div className="text-center mb-16 max-w-3xl mx-auto relative z-10">
                 <h2 className="text-4xl md:text-5xl lg:text-5xl font-black mb-6 tracking-tight text-white drop-shadow-lg">
-                    Traditional budgeting apps <br/>
+                    Apps de presupuesto tradicionales <br/>
                     <span className="text-white/40 font-light text-3xl">vs</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#397dc1] to-[#6ee7b7]">Lukas AI</span>
                 </h2>
                 <p className="text-white/70 text-lg md:text-xl leading-relaxed">
@@ -46,19 +46,19 @@ export default function Comparison() {
                             <span className="text-red-400/50 flex-shrink-0">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                             </span>
-                            <span className="text-lg">Manual expense tracking</span>
+                            <span className="text-lg">Registro de gastos manual</span>
                         </li>
                         <li className="flex items-center gap-4 text-white/50">
                             <span className="text-red-400/50 flex-shrink-0">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                             </span>
-                            <span className="text-lg">Forms and spreadsheets</span>
+                            <span className="text-lg">Formularios y hojas de cálculo</span>
                         </li>
                         <li className="flex items-center gap-4 text-white/50">
                             <span className="text-red-400/50 flex-shrink-0">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                             </span>
-                            <span className="text-lg">No intelligence</span>
+                            <span className="text-lg">Sin inteligencia</span>
                         </li>
                     </ul>
                 </div>
@@ -84,7 +84,7 @@ export default function Comparison() {
                                 <svg className="w-6 h-6 drop-shadow-[0_0_5px_rgba(16,185,129,0.5)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
                             </span>
                             <div>
-                                <span className="text-lg font-semibold block">Chat-based expense input</span>
+                                <span className="text-lg font-semibold block">Registro por chat</span>
                                 <span className="text-white/50 text-sm">Háblale como a un amigo, cero formularios.</span>
                             </div>
                         </li>
@@ -93,7 +93,7 @@ export default function Comparison() {
                                 <svg className="w-6 h-6 drop-shadow-[0_0_5px_rgba(16,185,129,0.5)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
                             </span>
                             <div>
-                                <span className="text-lg font-semibold block">Screenshot OCR</span>
+                                <span className="text-lg font-semibold block">OCR de pantallazos</span>
                                 <span className="text-white/50 text-sm">Extrae datos al instante de tus transferencias.</span>
                             </div>
                         </li>
@@ -102,7 +102,7 @@ export default function Comparison() {
                                 <svg className="w-6 h-6 drop-shadow-[0_0_5px_rgba(16,185,129,0.5)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
                             </span>
                             <div>
-                                <span className="text-lg font-semibold block">Automatic leak detection</span>
+                                <span className="text-lg font-semibold block">Detección automática de fugas</span>
                                 <span className="text-white/50 text-sm">Identifica y alerta sobre gastos hormiga.</span>
                             </div>
                         </li>
@@ -111,7 +111,7 @@ export default function Comparison() {
                                 <svg className="w-6 h-6 drop-shadow-[0_0_5px_rgba(16,185,129,0.5)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
                             </span>
                             <div>
-                                <span className="text-lg font-semibold block">Gamified financial score</span>
+                                <span className="text-lg font-semibold block">FinScore gamificado</span>
                                 <span className="text-white/50 text-sm">Mide tu progreso de forma divertida e interactiva.</span>
                             </div>
                         </li>

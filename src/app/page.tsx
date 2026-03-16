@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import ProblemStatement from "@/components/ProblemStatement";
 import InputMethods from "@/components/InputMethods";
 import LeakBuster from "@/components/LeakBuster";
 import LeakDetection from "@/components/LeakDetection";
@@ -42,6 +43,7 @@ export default function Home() {
       <Navbar />
       <BackgroundNetwork />
       <Hero />
+      <ProblemStatement />
       <LeakBuster />
       <InputMethods />
       <LeakDetection />

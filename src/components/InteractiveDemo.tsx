@@ -168,19 +168,19 @@ export default function InteractiveDemo() {
                             <div className="bg-black/40 border border-[#f36e53]/30 rounded-xl p-4 w-full text-left shadow-[0_0_20px_rgba(243,110,83,0.1)] transition-all duration-500">
                                 <div className="flex items-center gap-2 mb-3">
                                     <div className="w-2 h-2 rounded-full bg-[#f36e53] animate-pulse"></div>
-                                    <span className="text-[#f36e53] text-xs font-bold uppercase tracking-wider">Transaction detected</span>
+                                    <span className="text-[#f36e53] text-xs font-bold uppercase tracking-wider">Transacción detectada</span>
                                 </div>
                                 <div className="space-y-2 border-t border-white/10 pt-3">
                                     <div className="flex justify-between">
-                                        <span className="text-white/50 text-sm">Amount:</span>
+                                        <span className="text-white/50 text-sm">Monto:</span>
                                         <span className="text-white font-mono font-bold">$15.000 COP</span>
                                     </div>
                                     <div className="flex justify-between items-center">
-                                        <span className="text-white/50 text-sm">Category:</span>
+                                        <span className="text-white/50 text-sm">Categoría:</span>
                                         <span className="bg-[#f36e53]/20 text-[#f36e53] text-xs px-2 py-0.5 rounded-md font-semibold">Comida</span>
                                     </div>
                                     <div className="flex justify-between items-center">
-                                        <span className="text-white/50 text-sm">FinScore impact:</span>
+                                        <span className="text-white/50 text-sm">Impacto en FinScore:</span>
                                         <span className={`text-xs px-2 py-0.5 rounded-md font-bold transition-all duration-300 ${step === 3 ? 'text-[#f36e53] drop-shadow-[0_0_8px_rgba(243,110,83,0.8)]' : 'text-white/30'}`}>-5 Pts</span>
                                     </div>
                                 </div>

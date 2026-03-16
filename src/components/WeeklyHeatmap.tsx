@@ -111,12 +111,12 @@ export default function WeeklyHeatmap() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[500px] bg-gradient-to-r from-[#10b981]/10 via-transparent to-[#f36e53]/10 blur-[120px] rounded-[100%]"></div>
             </div>
 
-            <div className="text-center mb-16 max-w-4xl mx-auto">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight text-white drop-shadow-lg">
-                    Descubre tus <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f36e53] to-[#f97316]">zonas de calor</span>
+            <div className="text-center mb-24 max-w-4xl mx-auto">
+                <h2 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tight text-white drop-shadow-lg">
+                    Mapa de <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f36e53] to-[#f97316]">gastos</span>
                 </h2>
-                <p className="text-white/70 text-lg md:text-xl leading-relaxed">
-                    Lukas mapea la intensidad de tus gastos a lo largo de la semana. Visualiza exactamente cuándo ocurren tus mayores fugas de dinero (spoiler: casi siempre son los fines de semana en la noche).
+                <p className="text-white/70 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+                    Visualiza exactamente dónde se está yendo tu dinero.
                 </p>
             </div>
 
@@ -168,7 +168,7 @@ export default function WeeklyHeatmap() {
                                             {hoveredCell?.row === rowIndex && hoveredCell?.col === colIndex && (
                                                 <div className="absolute -top-14 left-1/2 -translate-x-1/2 bg-black/90 border border-white/20 text-white text-xs px-3 py-2 rounded-lg whitespace-nowrap z-20 shadow-xl animate-[fade-in-up_0.2s_ease-out]">
                                                     <p className="font-bold text-[#397dc1]">{DAYS[colIndex]} - {TIME_BLOCKS[rowIndex].short}</p>
-                                                    <p><span className="text-white/70">Intensidad:</span> {intensity} txns</p>
+                                                    <p><span className="text-white/70">Intensidad:</span> {intensity} transacciones</p>
                                                 </div>
                                             )}
                                         </div>

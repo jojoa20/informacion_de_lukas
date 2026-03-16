@@ -1,26 +1,26 @@
 export default function Features() {
     const features = [
         {
-            title: "Predictive Shortfalls",
-            description: "Lukas warns you days before your account balance drops below your upcoming auto-pays.",
+            title: "Déficit Predictivo",
+            description: "Lukas te avisa días antes de que tu saldo baje del monto necesario para tus pagos automáticos.",
             span: "col-span-1 md:col-span-2",
             icon: "⚡"
         },
         {
-            title: "Tax Optimization",
-            description: "Automatically categorized expenses for annual declarations.",
+            title: "Optimización de Impuestos",
+            description: "Gastos categorizados automáticamente para tus declaraciones anuales.",
             span: "col-span-1",
             icon: "📊"
         },
         {
-            title: "Smart Vaults",
-            description: "Auto-divert micro-savings into high-yield digital wallets securely.",
+            title: "Bóvedas Inteligentes",
+            description: "Desvía micro-ahorros automáticamente a bolsillos digitales de alto rendimiento.",
             span: "col-span-1",
             icon: "🏦"
         },
         {
-            title: "Voice Commands",
-            description: "Just say 'Lukas, can I buy this?' and get an instant AI analysis of the impact.",
+            title: "Comandos de Voz",
+            description: "Solo di 'Lukas, ¿puedo comprar esto?' y obtén un análisis instantáneo del impacto en tu presupuesto.",
             span: "col-span-1 md:col-span-2",
             icon: "🎙️"
         }
@@ -30,13 +30,13 @@ export default function Features() {
         <section className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 mt-12">
             <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-5xl font-bold mb-4">
-                    <span className="text-white">A full-stack </span>
+                    <span className="text-white">Un cerebro financiero </span>
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-lukas-primary">
-                        financial brain
+                        integral
                     </span>
                 </h2>
                 <p className="text-white/60 text-lg max-w-2xl mx-auto">
-                    Built precisely to automate the hard parts of money management so you can focus on building wealth.
+                    Diseñado para automatizar las partes difíciles de la gestión de dinero para que te enfoques en construir tu patrimonio.
                 </p>
             </div>
 

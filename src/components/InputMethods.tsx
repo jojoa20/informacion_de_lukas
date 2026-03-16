@@ -21,10 +21,10 @@ export default function InputMethods() {
 
       <div className="text-center mb-20 max-w-4xl mx-auto">
         <h2 className="text-4xl md:text-5xl lg:text-7xl font-black mb-6 tracking-tight text-white">
-          Cero formularios. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#397dc1] to-[#a898c9]">Solo habla con Lukas.</span>
+          Cero formularios. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#397dc1] to-[#a898c9]">Habla con Lukas.</span>
         </h2>
         <p className="text-white/70 text-lg md:text-2xl font-medium max-w-[720px] mx-auto leading-relaxed">
-          Ingresar tus gastos debería ser tan fácil como enviar un mensaje. Sin planillas, sin registros manuales.
+          Registra tus gastos como si estuvieras hablando con un amigo por WhatsApp.
         </p>
       </div>
 
@@ -36,7 +36,10 @@ export default function InputMethods() {
             <div className="w-10 h-10 rounded-xl bg-[#397dc1]/10 flex items-center justify-center border border-[#397dc1]/30 text-[#397dc1]">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
             </div>
-            <h3 className="text-lg font-bold text-white">Chat Intelligente</h3>
+            <div>
+              <h3 className="text-lg font-bold text-white">Chat Directo</h3>
+              <p className="text-white/40 text-xs font-medium">Escribe tus gastos en lenguaje natural.</p>
+            </div>
           </div>
 
           <div className="flex-1 flex flex-col justify-end space-y-6">
@@ -59,7 +62,7 @@ export default function InputMethods() {
                     
                     <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
                       <span className="text-[#397dc1]">Extrayendo Datos...</span>
-                      <span className="text-white/40">AI Engine active</span>
+                      <span className="text-white/40">Motor de AI activo</span>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
@@ -91,7 +94,10 @@ export default function InputMethods() {
             <div className="w-10 h-10 rounded-xl bg-[#a898c9]/10 flex items-center justify-center border border-[#a898c9]/30 text-[#a898c9]">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
             </div>
-            <h3 className="text-lg font-bold text-white">Voz Pana</h3>
+            <div>
+              <h3 className="text-lg font-bold text-white">Nota de Voz</h3>
+              <p className="text-white/40 text-xs font-medium">Lukas convierte tu audio en registros financieros.</p>
+            </div>
           </div>
 
           <div className="flex-1 flex flex-col items-center justify-center space-y-8">
@@ -116,7 +122,7 @@ export default function InputMethods() {
                   <div className="p-3 rounded-2xl bg-[#06b6d4]/10 border border-[#06b6d4]/20">
                     <div className="flex items-center justify-center gap-4">
                       <div className="text-center">
-                        <p className="text-white/40 text-[8px] uppercase font-black">AI Match</p>
+                        <p className="text-white/40 text-[8px] uppercase font-black">Coincidencia AI</p>
                         <p className="text-[#06b6d4] text-xs font-black">Transporte • $20k</p>
                       </div>
                     </div>
@@ -133,7 +139,10 @@ export default function InputMethods() {
             <div className="w-10 h-10 rounded-xl bg-[#f36e53]/10 flex items-center justify-center border border-[#f36e53]/30 text-[#f36e53]">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /></svg>
             </div>
-            <h3 className="text-lg font-bold text-white">OCR Pantallazo</h3>
+            <div>
+              <h3 className="text-lg font-bold text-white">Pantallazos</h3>
+              <p className="text-white/40 text-xs font-medium">Lukas lee recibos y transferencias automáticamente.</p>
+            </div>
           </div>
 
           <div className="flex-1 flex flex-col items-center justify-center space-y-6">
@@ -171,12 +180,12 @@ export default function InputMethods() {
                   className="w-full space-y-2 px-2"
                 >
                   <div className="flex justify-between items-center text-[9px] font-black uppercase text-white/40">
-                    <span>Field</span>
-                    <span>Confidence</span>
+                    <span>Campo</span>
+                    <span>Confianza</span>
                   </div>
                   {[
                     { l: 'Monto', v: '$15.000', c: '98%' },
-                    { l: 'Store', v: 'Empanadas', c: '95%' }
+                    { l: 'Tienda', v: 'Empanadas', c: '95%' }
                   ].map((f, i) => (
                     <div key={i} className="flex justify-between items-center p-2 rounded-lg bg-white/5 border border-white/5">
                       <div>
@@ -205,7 +214,7 @@ export default function InputMethods() {
       </div>
 
       <p className="text-center mt-8 text-[10px] font-mono font-black text-white/10 tracking-[0.5em] uppercase">
-        Lukas AI: Multimodal Input Engine Active
+        Lukas AI: Motor de Entrada Multimodal Activo
       </p>
     </section>
   );
