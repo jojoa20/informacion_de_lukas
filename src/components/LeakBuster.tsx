@@ -63,13 +63,13 @@ export default function LeakBuster() {
     }, [isInView]);
 
     return (
-        <section className="relative pt-10 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 bg-[#020617] overflow-hidden">
+        <section className="relative pt-10 pb-16 sm:pb-20 lg:pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 bg-[#020617] overflow-hidden">
             
             <div className="text-center mb-8 max-w-5xl mx-auto space-y-6">
                 <motion.h2 
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter text-white"
+                    className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter text-white"
                 >
                     LeakBuster
                 </motion.h2>
@@ -93,7 +93,7 @@ export default function LeakBuster() {
 
             <div 
                 ref={containerRef}
-                className="relative w-full max-w-5xl mx-auto min-h-[600px] flex items-center justify-center pt-10"
+                className="relative w-full max-w-5xl mx-auto min-h-[500px] sm:min-h-[600px] flex items-center justify-center pt-6 sm:pt-10"
             >
                 <AnimatePresence mode="wait">
                     {/* STEP 1: INCOME CARD */}
@@ -103,14 +103,14 @@ export default function LeakBuster() {
                             initial={{ scale: 0.8, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 1.1, opacity: 0 }}
-                            className="bg-black/40 border border-[#397dc1]/30 backdrop-blur-2xl rounded-[40px] p-16 text-center shadow-[0_0_100px_rgba(57,125,193,0.15)] relative overflow-hidden group"
+                            className="bg-black/40 border border-[#397dc1]/30 backdrop-blur-2xl rounded-[28px] sm:rounded-[40px] p-6 sm:p-16 text-center shadow-[0_0_100px_rgba(57,125,193,0.15)] relative overflow-hidden group w-full max-w-sm mx-auto"
                         >
                             {/* Ambient Glow */}
                             <div className="absolute inset-0 bg-gradient-to-br from-[#397dc1]/10 to-transparent pointer-events-none" />
                             
                             <p className="text-[#397dc1] text-xs font-black uppercase tracking-[0.5em] mb-6">Resumen de Ingresos</p>
                             <h3 className="text-white/60 text-2xl font-medium mb-2">Ingresos del mes</h3>
-                            <div className="text-white text-7xl md:text-8xl font-black tracking-tighter">
+                            <div className="text-white text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter">
                                 $2.400.000
                             </div>
                             
@@ -147,7 +147,7 @@ export default function LeakBuster() {
                                             borderColor: isAnomaly && state >= 3 ? 'rgba(243,110,83,0.5)' : 'rgba(255,255,255,0.05)',
                                         }}
                                         transition={{ delay: idx * 0.1 }}
-                                        className={`bg-[#0a0a0f] border rounded-[32px] p-8 flex flex-col justify-between transition-shadow duration-700 ${isAnomaly && state >= 3 ? 'shadow-[0_0_40px_rgba(243,110,83,0.1)]' : 'shadow-2xl'}`}
+                                        className={`bg-[#0a0a0f] border rounded-[24px] sm:rounded-[32px] p-5 sm:p-8 flex flex-col justify-between transition-shadow duration-700 ${isAnomaly && state >= 3 ? 'shadow-[0_0_40px_rgba(243,110,83,0.1)]' : 'shadow-2xl'}`}
                                     >
                                         <div>
                                             <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/40 mb-3">{cat.label}</p>

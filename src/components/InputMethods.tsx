@@ -14,16 +14,16 @@ export default function InputMethods() {
   }, []);
 
   return (
-    <section className="relative py-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 bg-[#020617] overflow-hidden">
+    <section className="relative py-16 sm:py-20 lg:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 bg-[#020617] overflow-hidden">
       
       {/* Background Decor */}
       <div className="absolute top-0 inset-x-0 h-px w-full bg-gradient-to-r from-transparent via-[#397dc1]/20 to-transparent" />
 
       <div className="text-center mb-20 max-w-4xl mx-auto">
-        <h2 className="text-4xl md:text-5xl lg:text-7xl font-black mb-6 tracking-tight text-white">
+        <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black mb-4 sm:mb-6 tracking-tight text-white">
           Cero formularios. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#397dc1] to-[#a898c9]">Habla con Lukas.</span>
         </h2>
-        <p className="text-white/70 text-lg md:text-2xl font-medium max-w-[720px] mx-auto leading-relaxed">
+        <p className="text-white/70 text-base sm:text-lg md:text-xl font-medium max-w-[720px] mx-auto leading-relaxed">
           Registra tus gastos como si estuvieras hablando con un amigo por WhatsApp.
         </p>
       </div>

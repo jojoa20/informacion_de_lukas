@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
     return (
-        <section className="relative min-h-[100vh] flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-32 pb-20">
+        <section className="relative min-h-[100vh] flex flex-col items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-16 lg:pb-20">
             {/* Deep Dark Gradient Background */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#020617] via-[#0f172a] to-[#020617] pointer-events-none z-[-2]" />
 
@@ -31,25 +31,23 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <h1 className="text-6xl md:text-8xl lg:text-[9rem] font-black tracking-tighter mb-10 leading-[0.85] text-white max-w-7xl mx-auto">
-                        Tu dinero se está escapando. <br/>
+                    <h1 className="text-[2rem] sm:text-5xl md:text-7xl lg:text-[9rem] font-black tracking-tighter mb-6 sm:mb-10 leading-[0.9] sm:leading-[0.85] text-white max-w-7xl mx-auto">
+                        Tu dinero se está escapando. <br className="hidden sm:block" />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#397dc1] to-[#a898c9]">Lukas te muestra dónde.</span>
                     </h1>
                     
-                    <p className="text-xl md:text-2xl font-medium text-white/70 mb-14 max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-base sm:text-xl md:text-2xl font-medium text-white/70 mb-8 sm:mb-14 max-w-3xl mx-auto leading-relaxed">
                         Lukas analiza tus gastos automáticamente y detecta fugas de dinero antes de que destruyan tu presupuesto.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20">
-                        <button className="group relative px-10 py-5 rounded-2xl bg-gradient-to-r from-[#397dc1] to-[#6b4de6] font-black text-white transition-all duration-300 shadow-[0_0_30px_rgba(57,125,193,0.3)] hover:shadow-[0_0_50px_rgba(57,125,193,0.5)] hover:-translate-y-1 hover:scale-105 active:scale-95 overflow-hidden">
-                            <span className="relative z-10 text-lg">Probar Lukas</span>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-12 sm:mb-20 w-full sm:w-auto">
+                        <button className="group relative w-full sm:w-auto min-h-[48px] px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-gradient-to-r from-[#397dc1] to-[#6b4de6] font-black text-white transition-all duration-300 shadow-[0_0_30px_rgba(57,125,193,0.3)] hover:shadow-[0_0_50px_rgba(57,125,193,0.5)] hover:-translate-y-1 hover:scale-105 active:scale-95 overflow-hidden">
+                            <span className="relative z-10 text-base sm:text-lg">Probar Lukas</span>
                             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                            
-                            {/* Pulse Aura Glow */}
                             <div className="absolute -inset-1 bg-gradient-to-r from-[#397dc1] to-[#a898c9] rounded-2xl blur-xl opacity-20 group-hover:opacity-40 animate-pulse pointer-events-none z-0" />
                         </button>
                         
-                        <button className="px-10 py-5 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-bold border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:scale-105 backdrop-blur-md active:scale-95 text-lg">
+                        <button className="w-full sm:w-auto min-h-[48px] px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-bold border border-white/10 transition-all duration-300 hover:-translate-y-1 hover:scale-105 backdrop-blur-md active:scale-95 text-base sm:text-lg">
                             Ver cómo funciona
                         </button>
                     </div>
@@ -76,13 +74,13 @@ export default function Hero() {
             </div>
 
             {/* Hero Visual: Floating Mockup and UI Elements */}
-            <div className="relative w-full max-w-lg mx-auto h-[500px] mt-10 perspective-1000">
+            <div className="relative w-full max-w-[280px] sm:max-w-lg mx-auto h-[380px] sm:h-[500px] mt-6 sm:mt-10 perspective-1000">
 
                 {/* Soft glow behind the phone mockup */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#397dc1]/20 to-[#a898c9]/20 rounded-3xl blur-[100px]" />
 
                 {/* Phone Mockup Placeholder */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[600px] rounded-[48px] border-[6px] border-white/10 bg-[#020617] backdrop-blur-3xl shadow-[0_0_80px_rgba(0,0,0,0.5)] animate-[float_8s_ease-in-out_infinite] overflow-hidden flex flex-col items-center">
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(240px,75vw)] sm:w-[300px] h-[min(480px,70vh)] sm:h-[600px] rounded-[40px] sm:rounded-[48px] border-[6px] border-white/10 bg-[#020617] backdrop-blur-3xl shadow-[0_0_80px_rgba(0,0,0,0.5)] animate-[float_8s_ease-in-out_infinite] overflow-hidden flex flex-col items-center">
                     {/* Top notch */}
                     <div className="w-[120px] h-7 bg-black rounded-b-2xl absolute top-0 left-1/2 -translate-x-1/2 z-20" />
 
