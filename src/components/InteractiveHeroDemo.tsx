@@ -83,7 +83,7 @@ export default function InteractiveHeroDemo() {
                             <div className="space-y-1.5 border-l border-white/10 pl-2">
                                 <p className="text-white/60 text-[10px]">Categoría: <span className="text-white font-semibold">Comida</span></p>
                                 <p className="text-white/60 text-[10px]">Monto: <span className="text-white font-semibold">$15.000</span></p>
-                                <p className="text-[#f36e53] text-[10px] font-bold animate-pulse">FinScore impact: -5</p>
+                                <p className="text-[#f36e53] text-[10px] font-bold animate-pulse">Impacto en FinScore: -5</p>
                             </div>
                         </div>
                     </div>

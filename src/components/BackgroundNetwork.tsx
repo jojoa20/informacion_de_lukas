@@ -2,6 +2,13 @@
 
 import React, { useEffect, useRef } from 'react';
 
+const NODE_COLOR = '#5FA8FF';
+const LINE_COLOR_BASE = '95, 168, 255'; // RGB for rgba()
+const GLOW_COLOR = 'rgba(95, 168, 255, 0.4)';
+const CONNECTION_DISTANCE = 160;
+const BASE_COUNT = 60; // desktop particle count
+const SPEED = 0.12; // extremely slow drift
+
 export default function BackgroundNetwork() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -14,9 +21,6 @@ export default function BackgroundNetwork() {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    const particleCount = 60;
-    const connectionDistance = 180;
-    const colors = ['#312e81', '#1e1b4b', '#397dc1', '#06b6d4']; // Indigo, Deep Purple, Blue, Cyan
 
     class Particle {
       x: number;
@@ -24,21 +28,21 @@ export default function BackgroundNetwork() {
       vx: number;
       vy: number;
       radius: number;
-      color: string;
+      alpha: number;
 
       constructor(width: number, height: number) {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.2; // Extra slow
-        this.vy = (Math.random() - 0.5) * 0.2;
-        this.radius = Math.random() * 1.5 + 0.5; // Smaller nodes
-        this.color = colors[Math.floor(Math.random() * colors.length)];
+        this.vx = (Math.random() - 0.5) * SPEED;
+        this.vy = (Math.random() - 0.5) * SPEED;
+        this.radius = Math.random() * 1.4 + 0.6;
+        this.alpha = Math.random() * 0.5 + 0.3; // subtle variance per node
       }
 
       update(width: number, height: number) {
         this.x += this.vx;
         this.y += this.vy;
-
+        // Wrap around edges smoothly
         if (this.x < 0) this.x = width;
         if (this.x > width) this.x = 0;
         if (this.y < 0) this.y = height;
@@ -46,18 +50,32 @@ export default function BackgroundNetwork() {
       }
 
       draw(ctx: CanvasRenderingContext2D) {
+        // Node glow halo
+        const gradient = ctx.createRadialGradient(
+          this.x, this.y, 0,
+          this.x, this.y, this.radius * 4
+        );
+        gradient.addColorStop(0, `rgba(95, 168, 255, ${this.alpha})`);
+        gradient.addColorStop(1, 'rgba(95, 168, 255, 0)');
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius * 4, 0, Math.PI * 2);
+        ctx.fillStyle = gradient;
+        ctx.fill();
+
+        // Node core
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = this.color;
-        ctx.globalAlpha = 0.4;
+        ctx.fillStyle = NODE_COLOR;
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = GLOW_COLOR;
+        ctx.globalAlpha = this.alpha;
         ctx.fill();
         ctx.globalAlpha = 1;
         ctx.shadowBlur = 0;
       }
     }
+
+    const isMobile = () => window.innerWidth < 768;
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -67,7 +85,9 @@ export default function BackgroundNetwork() {
 
     const init = () => {
       particles = [];
-      for (let i = 0; i < particleCount; i++) {
+      // 40% fewer nodes on mobile
+      const count = isMobile() ? Math.floor(BASE_COUNT * 0.6) : BASE_COUNT;
+      for (let i = 0; i < count; i++) {
         particles.push(new Particle(canvas.width, canvas.height));
       }
     };
@@ -78,25 +98,28 @@ export default function BackgroundNetwork() {
       for (let i = 0; i < particles.length; i++) {
         const p1 = particles[i];
         p1.update(canvas.width, canvas.height);
-        p1.draw(ctx);
 
+        // Draw connecting lines
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
           const dx = p1.x - p2.x;
           const dy = p1.y - p2.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+          const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < connectionDistance) {
+          if (dist < CONNECTION_DISTANCE) {
+            // Fade line based on distance
+            const lineAlpha = (1 - dist / CONNECTION_DISTANCE) * 0.22;
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            
-            const opacity = (1 - distance / connectionDistance) * 0.1;
-            ctx.strokeStyle = `rgba(57, 125, 193, ${opacity})`; 
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = `rgba(${LINE_COLOR_BASE}, ${lineAlpha})`;
+            ctx.lineWidth = 0.6;
             ctx.stroke();
           }
         }
+
+        // Draw node after lines so it appears on top
+        p1.draw(ctx);
       }
 
       animationFrameId = requestAnimationFrame(animate);
@@ -115,8 +138,8 @@ export default function BackgroundNetwork() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full -z-[100] bg-[#020617]"
-      style={{ pointerEvents: 'none' }}
+      className="fixed inset-0 w-full h-full bg-[#020617]"
+      style={{ pointerEvents: 'none', zIndex: -100, opacity: 0.25 }}
     />
   );
 }

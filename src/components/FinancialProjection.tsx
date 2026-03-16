@@ -97,11 +97,11 @@ export default function FinancialProjection() {
             </div>
 
             <div className="text-center mb-16 max-w-4xl mx-auto">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight text-white drop-shadow-lg">
-                    ¿Llegas vivo a fin de mes?
+                <h2 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 tracking-tight text-white drop-shadow-lg">
+                    Proyección <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#397dc1] to-[#10b981]">financiera</span>
                 </h2>
-                <p className="text-white/70 text-lg md:text-xl leading-relaxed">
-                    Lukas proyecta múltiples escenarios financieros para ti mediante un modelo de IA. Ajusta tus gastos diarios y visualiza qué tan probable es que te quedes sin saldo antes del día 30.
+                <p className="text-white/70 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+                    Lukas predice cómo terminará tu mes si sigues gastando al mismo ritmo.
                 </p>
             </div>
 

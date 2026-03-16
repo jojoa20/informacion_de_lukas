@@ -99,19 +99,19 @@ export default function CTA() {
                 {/* Decorative inner gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#397dc1]/10 to-transparent pointer-events-none" />
 
-                <h2 className="text-4xl md:text-6xl font-black mb-6 text-white tracking-tight drop-shadow-xl relative z-10">
-                    Si no sabes a dónde se fue tu plata, Lukas sí.
+                <h2 className="text-5xl md:text-7xl lg:text-8xl font-black mb-8 text-white tracking-tighter drop-shadow-2xl relative z-10 leading-[0.9]">
+                    Empieza a entender tu dinero.
                 </h2>
 
-                <p className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#397dc1] to-[#a898c9] mb-12 drop-shadow-md relative z-10">
-                    Empieza a entender tus finanzas en minutos.
+                <p className="text-xl md:text-2xl font-medium text-white/80 mb-12 max-w-2xl mx-auto relative z-10">
+                    Conecta tus cuentas o registra tus gastos y deja que Lukas haga el resto.
                 </p>
 
                 <button
-                    className="relative group px-10 md:px-14 py-4 md:py-5 rounded-full bg-white text-black font-extrabold text-lg md:text-xl transition-all duration-300 hover:scale-105 hover:shadow-[0_0_50px_rgba(57,125,193,0.6)] btn-glow-hover active:scale-95 overflow-hidden z-20"
+                    className="relative group px-12 md:px-16 py-5 md:py-6 rounded-full bg-white text-black font-black text-xl md:text-2xl transition-all duration-300 hover:scale-105 hover:shadow-[0_0_60px_rgba(255,255,255,0.4)] active:scale-95 overflow-hidden z-20"
                 >
-                    <span className="relative z-10">Hablar con Lukas</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#397dc1]/30 via-[#a898c9]/30 to-[#397dc1]/30 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                    <span className="relative z-10">Empezar gratis</span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-lukas-primary/20 via-transparent to-lukas-primary/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
                 </button>
 
             </div>

@@ -31,16 +31,13 @@ export default function Hero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <h1 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter mb-8 leading-[0.9] text-white">
-                        Tu IA <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#397dc1] to-[#a898c9]">financiera</span> personal.
+                    <h1 className="text-6xl md:text-8xl lg:text-[9rem] font-black tracking-tighter mb-10 leading-[0.85] text-white max-w-7xl mx-auto">
+                        Tu dinero se está escapando. <br/>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#397dc1] to-[#a898c9]">Lukas te muestra dónde.</span>
                     </h1>
                     
-                    <p className="text-2xl md:text-4xl font-bold text-white/90 mb-8 max-w-4xl mx-auto leading-tight tracking-tight">
-                        Detecta fugas de dinero antes de que destruyan tu presupuesto.
-                    </p>
-
-                    <p className="text-lg md:text-xl text-white/60 mb-12 max-w-2xl mx-auto leading-relaxed">
-                        Lukas analiza tus gastos, encuentra patrones ocultos y mejora tu FinScore automáticamente.
+                    <p className="text-xl md:text-2xl font-medium text-white/70 mb-14 max-w-3xl mx-auto leading-relaxed">
+                        Lukas analiza tus gastos automáticamente y detecta fugas de dinero antes de que destruyan tu presupuesto.
                     </p>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-20">
@@ -97,12 +94,12 @@ export default function Hero() {
 
                 {/* Floating UI Elements */}
                 <div className="absolute top-1/4 -left-32 bg-[#0f172a]/80 border border-[#f36e53]/30 backdrop-blur-xl rounded-2xl p-4 shadow-2xl animate-[float_6s_ease-in-out_infinite] hidden lg:block">
-                    <p className="text-[10px] font-black text-[#f36e53] uppercase tracking-widest mb-1">Leak Detected</p>
+                    <p className="text-[10px] font-black text-[#f36e53] uppercase tracking-widest mb-1">Fuga detectada</p>
                     <p className="text-white font-bold leading-tight">$15.000 en Empanadas</p>
                 </div>
 
                 <div className="absolute bottom-1/4 -right-32 bg-[#0f172a]/80 border border-[#397dc1]/30 backdrop-blur-xl rounded-2xl p-4 shadow-2xl animate-[float_7s_ease-in-out_infinite_1s] hidden lg:block">
-                    <p className="text-[10px] font-black text-[#397dc1] uppercase tracking-widest mb-1">Optimization</p>
+                    <p className="text-[10px] font-black text-[#397dc1] uppercase tracking-widest mb-1">Optimización</p>
                     <p className="text-white font-bold leading-tight">FinScore +42 pts</p>
                 </div>
 

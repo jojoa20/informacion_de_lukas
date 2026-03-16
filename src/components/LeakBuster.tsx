@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence, useInView, useSpring, useTransform } from 'framer-motion';
 
 const CATEGORIES = [
@@ -62,23 +63,31 @@ export default function LeakBuster() {
     }, [isInView]);
 
     return (
-        <section className="relative py-40 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 bg-[#020617] overflow-hidden">
+        <section className="relative pt-10 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 bg-[#020617] overflow-hidden">
             
-            <div className="text-center mb-24 max-w-4xl mx-auto">
+            <div className="text-center mb-8 max-w-5xl mx-auto space-y-6">
                 <motion.h2 
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    className="text-5xl md:text-7xl font-black mb-6 tracking-tight text-white"
+                    className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter text-white"
                 >
-                    Lukas detecta fugas de <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#397dc1] to-[#f36e53]">dinero automáticamente</span>
+                    LeakBuster
                 </motion.h2>
-                <motion.p 
+                <motion.h3
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="text-white/60 text-xl md:text-2xl font-medium max-w-[720px] mx-auto leading-relaxed"
+                    className="text-2xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#397dc1] to-[#f36e53] tracking-tight"
                 >
-                    Pequeños gastos pueden destruir tu presupuesto mensual.
+                    La IA que detecta fugas de dinero.
+                </motion.h3>
+                <motion.p 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-white/60 text-lg md:text-xl font-medium max-w-3xl mx-auto leading-relaxed"
+                >
+                    Lukas analiza automáticamente tus patrones de gasto y detecta comportamientos financieros anormales.
                 </motion.p>
             </div>
 
@@ -99,7 +108,7 @@ export default function LeakBuster() {
                             {/* Ambient Glow */}
                             <div className="absolute inset-0 bg-gradient-to-br from-[#397dc1]/10 to-transparent pointer-events-none" />
                             
-                            <p className="text-[#397dc1] text-xs font-black uppercase tracking-[0.5em] mb-6">Income Overview</p>
+                            <p className="text-[#397dc1] text-xs font-black uppercase tracking-[0.5em] mb-6">Resumen de Ingresos</p>
                             <h3 className="text-white/60 text-2xl font-medium mb-2">Ingresos del mes</h3>
                             <div className="text-white text-7xl md:text-8xl font-black tracking-tighter">
                                 $2.400.000
@@ -168,7 +177,7 @@ export default function LeakBuster() {
                     )}
                 </AnimatePresence>
 
-                {/* STEP 4/5: OVERLAY ALERT */}
+                {/* STEP 4/5: OVERLAY ALERT + MASCOT */}
                 <AnimatePresence>
                     {state >= 4 && (
                         <motion.div 
@@ -178,21 +187,44 @@ export default function LeakBuster() {
                             transition={{ type: "spring", damping: 20, stiffness: 100 }}
                             className="absolute -bottom-20 z-50 w-full flex justify-center px-4"
                         >
-                            <div className="bg-[#141419] border-t-2 border-t-[#f36e53] border-x border-b border-white/10 backdrop-blur-3xl rounded-[40px] p-10 md:p-12 shadow-[0_-20px_100px_rgba(243,110,83,0.15)] max-w-3xl w-full">
-                                <div className="flex flex-col md:flex-row items-center gap-10">
-                                    <div className="w-20 h-20 rounded-3xl bg-[#f36e53]/10 flex items-center justify-center text-[#f36e53] text-4xl shadow-[0_0_30px_rgba(243,110,83,0.2)] animate-pulse">
-                                        ⚠️
-                                    </div>
-                                    <div className="text-center md:text-left space-y-4">
-                                        <p className="text-[#f36e53] text-sm font-black uppercase tracking-[0.5em]">Lukas AI Detection</p>
-                                        <h4 className="text-white text-3xl md:text-4xl font-black tracking-tight leading-tight">
-                                            Lukas detectó una <span className="underline decoration-[#f36e53]/30 underline-offset-8">fuga de dinero</span>
-                                        </h4>
-                                        <p className="text-white/60 text-xl font-medium">
-                                            Este mes llevas <span className="text-white font-black text-2xl">$180.000</span> en domicilios.
-                                        </p>
+                            <div className="relative flex items-end gap-4 w-full max-w-3xl">
+                                {/* Alert Card */}
+                                <div className="flex-1 bg-[#141419] border-t-2 border-t-[#f36e53] border-x border-b border-white/10 backdrop-blur-3xl rounded-[40px] p-10 md:p-12 shadow-[0_-20px_100px_rgba(243,110,83,0.15)]">
+                                    <div className="flex flex-col md:flex-row items-center gap-10">
+                                        <div className="w-20 h-20 rounded-3xl bg-[#f36e53]/10 flex items-center justify-center text-[#f36e53] text-4xl shadow-[0_0_30px_rgba(243,110,83,0.2)] animate-pulse">
+                                            ⚠️
+                                        </div>
+                                        <div className="text-center md:text-left space-y-4">
+                                            <p className="text-[#f36e53] text-sm font-black uppercase tracking-[0.5em]">Detección Lukas AI</p>
+                                            <h4 className="text-white text-3xl md:text-4xl font-black tracking-tight leading-tight">
+                                                Lukas detectó una <span className="underline decoration-[#f36e53]/30 underline-offset-8">fuga de dinero</span>
+                                            </h4>
+                                            <p className="text-white/60 text-xl font-medium">
+                                                Este mes llevas <span className="text-white font-black text-2xl">$180.000</span> en domicilios.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
+
+                                {/* Lukas Estricto Mascot */}
+                                <motion.div
+                                    initial={{ opacity: 0, y: 30, scale: 0.8 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    transition={{ type: "spring", damping: 12, stiffness: 200, delay: 0.15 }}
+                                    className="hidden md:flex flex-col items-center flex-shrink-0"
+                                >
+                                    <div className="drop-shadow-[0_0_20px_rgba(243,110,83,0.5)]">
+                                        <Image
+                                            src="/mascots/lukas_estricto.png"
+                                            alt="Lukas estricto"
+                                            width={110}
+                                            height={110}
+                                            className="object-contain"
+                                            style={{ maxHeight: 110 }}
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                </motion.div>
                             </div>
                         </motion.div>
                     )}
@@ -210,7 +242,7 @@ export default function LeakBuster() {
             </div>
 
             <p className="text-center mt-12 text-[10px] font-mono font-black text-white/5 tracking-[1em] uppercase py-8 border-y border-white/5">
-                Storytelling Engine v4.0 • Zero Clutter Mode
+                Motor de Storytelling v4.0 • Modo Sin Distracciones
             </p>
         </section>
     );
