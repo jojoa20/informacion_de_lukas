@@ -36,6 +36,23 @@ yarn-error.log*
 # vercel
 .vercel
 
+# temporary files/logs
+*.log
+
+# assets/docs that should not be in the production deployment repo
+/cosas_paralaapp/
+
+# generated images / mockups
+Gemini_Generated_Image_*
+*.zip
+
+# server logs
+node_server.log
+server.log
+
+# IDE / editor
+.vscode/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
