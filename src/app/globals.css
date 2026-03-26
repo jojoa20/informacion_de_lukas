@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter);
+  --color-lukas-deep: #120c2c;
+  --color-lukas-mid: #1f1445;
+  --color-lukas-slate: #0f172a;
+  --color-lukas-primary: #7c5cff;
+  --color-lukas-alert: #ff7a59;
+  --color-lukas-success: #6ee7b7;
+}
+
+:root {
+  --background: #120c2c;
+  --foreground: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  background-image: radial-gradient(circle at 50% 0%, #1f1445 0%, #120c2c 50%, #0f172a 100%);
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: var(--font-inter), sans-serif;
+  min-height: 100vh;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotateX(5deg) rotateY(-10deg);
+  }
+
+  50% {
+    transform: translateY(-15px) rotateX(8deg) rotateY(-8deg);
+  }
+}
+
+@keyframes data-flow-y {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(2000px);
+    opacity: 0;
+  }
+}
+
+@keyframes data-flow-x {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(2000px);
+    opacity: 0;
+  }
+}
+
+@keyframes leak-drop {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+    transform: translateY(20px);
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scan {
+  0% {
+    top: 5%;
+  }
+
+  100% {
+    top: 95%;
+  }
+}
+
+@keyframes converge {
+  0% {
+    transform: scale(1);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
