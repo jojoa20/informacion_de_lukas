@@ -1,0 +1,27 @@
+{
+  "name": "Lukas - Smart Shopping Copilot",
+  "short_name": "Lukas",
+  "description": "Tu copiloto inteligente para ahorrar en cada compra. Compara precios, gestiona presupuestos compartidos y descubre ofertas mágicas.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0f16",
+  "theme_color": "#4FACFE",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["shopping", "finance", "lifestyle"],
+  "lang": "es-CO",
+  "dir": "ltr"
+}
