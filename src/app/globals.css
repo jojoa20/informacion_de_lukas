@@ -17,6 +17,8 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -26,6 +28,20 @@ body {
   color: var(--foreground);
   font-family: var(--font-inter), sans-serif;
   min-height: 100vh;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, p, span {
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 @keyframes float {

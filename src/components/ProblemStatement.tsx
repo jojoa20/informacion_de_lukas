@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 export default function ProblemStatement() {
     return (
-        <section className="relative pt-20 pb-0 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden bg-transparent">
+        <section className="relative pt-16 sm:pt-20 pb-0 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-hidden bg-transparent">
             {/* Minimal background elements */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#397dc1]/5 blur-[120px] rounded-full -z-10" />
 
@@ -16,7 +16,7 @@ export default function ProblemStatement() {
                     transition={{ duration: 0.8 }}
                     viewport={{ once: true, amount: 0.5 }}
                 >
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight text-white leading-tight">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight text-white leading-tight">
                         La mayoría de los problemas <br className="hidden md:block" />
                         <span className="text-white/40">financieros empiezan así.</span>
                     </h2>

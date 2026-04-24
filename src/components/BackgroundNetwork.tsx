@@ -75,7 +75,12 @@ export default function BackgroundNetwork() {
       }
     }
 
-    const isMobile = () => window.innerWidth < 768;
+    const getNodeCount = () => {
+      const w = window.innerWidth;
+      if (w < 768) return Math.floor(BASE_COUNT * 0.5);   // mobile: -50%
+      if (w < 1024) return Math.floor(BASE_COUNT * 0.7);  // tablet: -30%
+      return BASE_COUNT;                                    // desktop: full
+    };
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -85,8 +90,7 @@ export default function BackgroundNetwork() {
 
     const init = () => {
       particles = [];
-      // 40% fewer nodes on mobile
-      const count = isMobile() ? Math.floor(BASE_COUNT * 0.6) : BASE_COUNT;
+      const count = getNodeCount();
       for (let i = 0; i < count; i++) {
         particles.push(new Particle(canvas.width, canvas.height));
       }

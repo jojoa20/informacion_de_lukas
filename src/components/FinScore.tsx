@@ -116,13 +116,13 @@ export default function FinScore() {
     }, []);
 
     return (
-        <section className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 bg-[#0f172a]">
+        <section className="relative py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5 bg-[#0f172a]">
             
             <div className="text-center mb-16 max-w-4xl mx-auto space-y-6">
                 <motion.h2 
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white"
+                    className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-white"
                 >
                     FinScore
                 </motion.h2>
